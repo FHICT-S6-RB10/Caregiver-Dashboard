@@ -1,0 +1,32 @@
+{
+    "patients": [
+        {
+            "firstName": "Dimitar", 
+            "lastName": "Lalev", 
+            "stressed": "stressed", 
+            "group": 1, 
+            "id": 1
+        },
+        {
+            "firstName": "Edita", 
+            "lastName": "Lalev", 
+            "stressed": "not stressed", 
+            "group": 1, 
+            "id": 2
+        },
+        {
+            "firstName": "Jorick", 
+            "lastName": "Lalev", 
+            "stressed": "stressed", 
+            "group": 2, 
+            "id": 3
+        },
+        {
+            "firstName": "Nick", 
+            "lastName": "Lalev", 
+            "stressed": "not stressed", 
+            "group": 2, 
+            "id": 4
+        }
+    ]
+}
