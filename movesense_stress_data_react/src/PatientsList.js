@@ -8,12 +8,13 @@ const PatientsList = ({ clients }) => {
     return ( 
 
         <div className="patients-list">
-
-            {console.log(clients)}
-            {clients.map((client) => (
+            
+            {clients && clients.map((client) => (
                 <div className="patients-preview" key={client.id}>
-                    <Link to={`/patient/${client.id}`}>
-                    <h2>New Patient Has Been Added: { client.firstName } { client.lastName} | Group: {client.group}</h2>
+                    <Link className="links" to={`/patient/${client.id}`}>
+                    <h2>New Patient Has Been Added: 
+                        <span>{ client.firstName } { client.lastName}</span>
+                    </h2>
                     </Link>
                 </div>
             ))}

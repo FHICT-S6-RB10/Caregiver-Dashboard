@@ -7,16 +7,16 @@ const Home = () => {
 
     const { data, isPending, error } = useFetch('https://localhost:44350/patients');
 
-    return ( 
+    return (
         <div className="home">
-            <h1>
-                Welcome Dr Strange
-            </h1>
-            { error && <div>{error}</div>}
-            { isPending &&<div>Loading...</div>}
-            {!isPending &&
-            <PatientsList clients={data} title="All Clients"/>
-            }
+                <h1>
+                    Welcome Dr Strange
+                </h1>
+                { error && <div>{error}</div>}
+                { isPending &&<div>Loading...</div>}
+                {!isPending &&
+                <PatientsList clients={data} title="All Clients"/>
+                }
 
             {/* <button onClick={() => setName('dimm')}>Change Name</button>
             <p>{name}</p>

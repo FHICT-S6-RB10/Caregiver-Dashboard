@@ -4,8 +4,10 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  background-image: url('2993237.jpg');
 }
 
 code {
@@ -14,7 +16,8 @@ code {
 }
 .home h1{
   text-shadow: 1px 1px #757575;
-  margin-bottom: 15px;
+  margin: 50px;
+
 }
 
 /* navbar base styles */
@@ -25,39 +28,52 @@ code {
 }
 .navbar {
   padding: 20px;
-  display: flex;
+  float: left;
+  /* display: flex; */
   align-items: center;
-  max-width: 600px;
-  margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
+  width: 25%;
+  height: 892px;
+  max-width: 26%;
+  /* background-color: #fafafad3; */
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #fafafad3;
 }
 .navbar h1 {
+  font-size: 40px;
   color: #f1356d;
 }
 .navbar .links {
-  margin-left: auto;
+  margin-left: 0 auto;
+  float: right;
 }
 .navbar a {
-  margin-left: 16px;
+  margin-left: 0px;
   text-decoration: none;
-  padding: 6px;
+  padding: 0px;
 }
 .navbar a:hover {
   color: #f1356d;
 }
+.navbar .search {
+  margin-top: 20px;
+}
 .content {
-  max-width: 600px;
+  max-width: 45%;
+  height: 892px;
   margin: 40px auto;
   padding: 20px;
+  background-color: #fafafa;
+
 }
 
 /* clients preview */
 .patients-preview {
+  text-decoration: none;
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   border-radius: 22px;
-  background-color: rgb(211, 211, 211);
+  background-color: #f2f2f2;
 }
 .patients-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
@@ -66,4 +82,59 @@ code {
   font-size: 20px;
   color: #333333;
   margin-bottom: 8px;
+  text-decoration: none;
 }
+.patients-preview .links {
+  text-decoration: none;
+}
+.patient-details {
+  font-size: 20px;
+  color: #333333;
+  margin-bottom: 8px;
+}
+.patient-details h2 {
+  margin: 30px;
+}
+.patient-details p {
+  padding: 7px;
+}
+.search {
+  font-size: 20px;
+  color: #333333;
+  margin-bottom: 8px;
+}
+.search input {
+  float: left;
+  height: 30px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.search button {
+  text-align: center;
+  height: 30px;
+  float: right;
+  width: 20%;
+  background-color: #f1356d8a;
+  color: white;
+  padding: 7px 20px 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.left {
+  float:left;
+  min-width: 24%;
+  max-width: 25%;
+  background-color: #333;
+  min-height: 973px;
+}
+
+/* Search */
