@@ -32,7 +32,8 @@ code {
   /* display: flex; */
   align-items: center;
   width: 25%;
-  height: 892px;
+  height: 95%;
+  min-height: 972px;
   max-width: 26%;
   /* background-color: #fafafad3; */
   background-color: #f2f2f2;
@@ -58,9 +59,11 @@ code {
   margin-top: 20px;
 }
 .content {
+  top: 0;
   max-width: 45%;
-  height: 892px;
+  height: 972px;
   margin: 40px auto;
+  margin-top: 0;
   padding: 20px;
   background-color: #fafafa;
 
