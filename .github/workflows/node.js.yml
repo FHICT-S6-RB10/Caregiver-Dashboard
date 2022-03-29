@@ -26,7 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
+        cache-dependency-path: movesens_stress_data_react/package-lock.json
+
     - name: Install dependencies
       run: npm install
       
