@@ -1,4 +1,5 @@
 body {
+  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -27,17 +28,17 @@ code {
   color: #333;
 }
 .navbar {
-  padding: 20px;
+  top:0;
+  padding: 0px 20px 0px 20px;
   float: left;
   /* display: flex; */
   align-items: center;
   width: 25%;
-  height: 95%;
-  min-height: 972px;
+  min-height: 100vh;
   max-width: 26%;
   /* background-color: #fafafad3; */
   background-color: #f2f2f2;
-  border-bottom: 1px solid #fafafad3;
+  border-right: 2px solid #fafafabb;
 }
 .navbar h1 {
   font-size: 40px;
@@ -59,12 +60,14 @@ code {
   margin-top: 20px;
 }
 .content {
+  float: left;
   top: 0;
-  max-width: 45%;
-  height: 972px;
-  margin: 40px auto;
+  height: 100vh;
+  width: 72%;
   margin-top: 0;
-  padding: 20px;
+  margin-bottom: 0;
+
+  padding-bottom: 0;
   background-color: #fafafa;
 
 }
@@ -139,5 +142,9 @@ code {
   background-color: #333;
   min-height: 973px;
 }
-
-/* Search */
+.maxheight {
+  min-height: 100%;
+}
+.grid-container--fit {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
+}

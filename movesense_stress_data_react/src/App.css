@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.App .red {
+  background-color: red;
+}
+
+.App .blue {
+  background-color: blue;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
