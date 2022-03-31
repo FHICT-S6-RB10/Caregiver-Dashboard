@@ -1,10 +1,11 @@
-import './App.css';
+import './App.scss';
 import Navbar from './Navbar';
 import Grid, { Container, Row, Col } from "react-bootstrap"
 import Home from './Home';
 import Patient from './Patient';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import useFetch from "./useFetch";
+
 
 
 

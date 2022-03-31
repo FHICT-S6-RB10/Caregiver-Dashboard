@@ -1,8 +1,12 @@
 import { useParams } from "react-router-dom";
+import useFetch from "./useFetch";
 
 const Patient = ({clients}) => {
 
     const { id } = useParams()
+
+    const { data, isPending, error } = useFetch('https://localhost:44350/stressmeasurements/patient/:id');
+
     
     
     
