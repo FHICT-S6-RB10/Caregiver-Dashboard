@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import Dropdown from "./Dropdown";
+import AlertButton from "./AlertButton";
 
 const groups = [
     {
@@ -18,58 +19,16 @@ const groups = [
   
   ];
 
-const patients = [
-    {
-        firstName: "Dimitar", 
-        lastName: "Lalev", 
-        stressed: "stressed", 
-        group: 1, 
-        id: 1,
-    },
-    {
-        firstName: "Edita", 
-        lastName: "Lalev", 
-        stressed: "stressed", 
-        group: 2, 
-        id: 2,
-    },
-    {
-        firstName: "Bas", 
-        lastName: "Lalev", 
-        stressed: "stressed", 
-        group: 3, 
-        id: 3,
-    },
-    {
-        firstName: "Jorick", 
-        lastName: "Lalev", 
-        stressed: "stressed", 
-        group: 1, 
-        id: 1,
-    },
-    {
-        firstName: "Nick", 
-        lastName: "Lalev", 
-        stressed: "stressed", 
-        group: 1, 
-        id: 1,
-    },
-]
-
-const Navbar = () => {
-
-    // const [searchField, setSearchField] = useState('');
-
-    // const handleChange = e => {
-    //     setSearchField(e.target.value);
-    //   };
+const Navbar = ({patients}) => {
 
     return (
 
         <nav className="navbar">
+            <Link to="/">
             <h1>
                 MoveSense
             </h1>
+            </Link>
             <div className="links">
                 {/* <Link to="/logout">Logout</Link> */}
             </div>
@@ -83,8 +42,9 @@ const Navbar = () => {
             </div>
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
-                {console.log(patients)}
+                <AlertButton />
             </div>
+
 
             
             {/* </div> */}

@@ -5,7 +5,7 @@ import useFetch from "./useFetch";
 
 const Home = () => {
 
-    const { data, isPending, error } = useFetch('https://localhost:44350/patients');
+    const { data, isPending, error } = useFetch('https://localhost:5001/patients');
 
     return (
         <div className="home">
@@ -17,11 +17,6 @@ const Home = () => {
                 {!isPending &&
                 <PatientsList clients={data} title="All Clients"/>
                 }
-
-            {/* <button onClick={() => setName('dimm')}>Change Name</button>
-            <p>{name}</p>
-            <PostList posts={posts.filter((post) => post.author === 'Dimitar')} title="Dimitar's posts" handleDelete={handleDelete}/> */}
-
         </div>
      );
 }

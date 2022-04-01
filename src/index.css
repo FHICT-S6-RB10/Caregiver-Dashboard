@@ -59,6 +59,18 @@ code {
 .navbar .search {
   margin-top: 20px;
 }
+.navbar .alertButton {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background-image: url('../images/bell.png');
+  background-size: 70px 70px;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px 3px #757575;
+} 
 .content {
   float: left;
   top: 0;
@@ -66,17 +78,16 @@ code {
   width: 72%;
   margin-top: 0;
   margin-bottom: 0;
-
   padding-bottom: 0;
   background-color: #fafafa;
-
 }
 
-/* clients preview */
+/* patients preview */
 .patients-preview {
+  width: 70%;
   text-decoration: none;
   padding: 10px 16px;
-  margin: 20px 0;
+  margin: 20px auto;
   border-bottom: 1px solid #fafafa;
   border-radius: 22px;
   background-color: #f2f2f2;

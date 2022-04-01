@@ -9,7 +9,7 @@ const PatientsList = ({ clients }) => {
 
         <div className="patients-list">
             
-            {clients && clients.map((client) => (
+            {clients && clients.slice(0, 10).map((client) => (
                 <div className="patients-preview" key={client.id}>
                     <Link className="links" to={`/patient/${client.id}`}>
                     <h2>New Patient Has Been Added: 

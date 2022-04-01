@@ -12,9 +12,6 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
     const toggle = () => setOpen(!open);
     Dropdown.handleClickOutside = () => setOpen(false);
 
-    const { data, isPending, error } = useFetch('https://localhost:44350/patients');
-
-
     function handleOnCLick(group) {
         if (!selection.some(current => current.id === group.id))
         {
@@ -65,7 +62,21 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
                 <li className="dd-list-item" key={group.id}>
                     <button type="button" onClick={() => handleOnCLick(group)}>
                         <span>{group.value}</span>
-                        <span>{isItemInSelection(group) && patients.map(
+                        <span>{group.id === 1 && isItemInSelection(group) && patients.slice(0, 3).map(
+                           patient => ( 
+                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
+                           )
+                        )
+                        // <PatientsList clients={data} title="All Clients"/> 
+                        }
+                        {group.id === 2 && isItemInSelection(group) && patients.slice(3,7).map(
+                           patient => ( 
+                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
+                           )
+                        )
+                        // <PatientsList clients={data} title="All Clients"/> 
+                        }
+                        {group.id === 3 && isItemInSelection(group) && patients.slice(8,10).map(
                            patient => ( 
                                <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
                            )
@@ -77,7 +88,6 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
                 </li>
                 ))}
                 </ul>
-            
             )}
         </div>
     );
