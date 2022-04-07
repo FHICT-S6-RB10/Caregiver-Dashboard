@@ -35,8 +35,8 @@ const Navbar = ({patients}) => {
             <div className="search">
                     <input 
                         className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
-                        type = "search" 
-                        placeholder = "Search People and Groups" 
+                        type = "search"
+                        placeholder = "Search People and Groups"
                     />
                     <button>Search</button>
             </div>
