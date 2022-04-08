@@ -42,7 +42,7 @@ code {
 }
 .navbar h1 {
   font-size: 40px;
-  color: #f1356d;
+  color: #8884d8;
 }
 .navbar .links {
   margin-left: 0 auto;
@@ -54,7 +54,7 @@ code {
   padding: 0px;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: #7a75e6;
 }
 .navbar .search {
   margin-top: 20px;
@@ -138,7 +138,7 @@ code {
   height: 30px;
   float: right;
   width: 20%;
-  background-color: #f1356d8a;
+  background-color: #817ceb;
   color: white;
   padding: 7px 20px 14px 20px;
   margin: 8px 0;
