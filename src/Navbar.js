@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Dropdown from "./Dropdown";
 import AlertButton from "./AlertButton";
+import axios from "axios";
 
 const groups = [
     {
@@ -19,7 +20,20 @@ const groups = [
   
   ];
 
-const Navbar = ({patients}) => {
+const Navbar = () => {
+
+  const [patients, setPatients] = useState([])
+
+    useEffect(()=>{
+        getPatients()
+        console.log(patients)
+    },[])
+
+    const getPatients = async () =>{
+        await axios.get("https://localhost:44350/patients").then((res)=>{
+           setPatients([...res.data])
+         })
+    }
 
     return (
 
@@ -42,7 +56,9 @@ const Navbar = ({patients}) => {
             </div>
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
+                <Link to="/">
                 <AlertButton />
+                </Link>
             </div>
 
 

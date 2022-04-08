@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <div className="home">
                 <h1>
-                    Welcome Dr Strange
+                    Welcome, Dr Strange!
                 </h1>
                 { error && <div>{error}</div>}
                 { isPending &&<div>Loading...</div>}

@@ -12,9 +12,11 @@ import useFetch from "./useFetch";
 
 function App() {
 
-  const { data } = useFetch('https://localhost:44350/patients');
+  // const { data } = useFetch('https://localhost:44350/patients');
 
-  const { data:stressdata } = useFetch('https://localhost:44350/stressmeasurements');
+  // const { data:stressdata } = useFetch('https://localhost:44350/stressmeasurements');
+
+  // const {data:stressDataPerPatient} = useFetch('');
 
 
   return (
@@ -22,7 +24,7 @@ function App() {
     <div className="App">
     <Container>
       <Row md={4}>
-        <Col xs={6} className="maxheight"><Navbar patients={data}/></Col>
+        <Col xs={6} className="maxheight"><Navbar/></Col>
         <Col xs={6} className="grid-container--fit">
           <div className='content'>
             <Switch>
@@ -30,7 +32,7 @@ function App() {
                 <Home />
               </Route>
               <Route path ="/patient/:id">
-                <Patient clients={data} stressData={stressdata}/>
+                <Patient/>
               </Route>
             </Switch>
           </div>

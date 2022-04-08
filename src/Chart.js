@@ -2,28 +2,47 @@ import './App.scss';
 import useFetch from './useFetch';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Label } from 'recharts';
 import { format } from 'date-fns-tz';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
 const App = ({patientId}) => {
 
-  const { data:patientStressData } = useFetch("https://localhost:44350/stressmeasurements/patient/"+patientId);
-
   var testData = [];
-  patientStressData.forEach(stressData =>{
-      var date = new Date(stressData.timeStamp.substring(0, 19));
-      var day = date.getDay();
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
+  const [data,setData] = useState([])
+  //const { data:patientStressData, isPending, error } = useFetch("https://localhost:44350/stressmeasurements/patient/"+patientId);
+  const [patientStressData, setPatientStressData] = useState([])
+  useEffect(()=>{
+    getPatientStressData()
+    
 
-      var datapoint = {
-        stressValue: stressData.stressValue,
-        timeStamp: hours.toString()+":"+minutes.toString()
-      }
+  },[])
 
-      testData.push(datapoint);
-  });
-  console.log(testData);
+  useEffect(()=>{
+    console.log(patientStressData)
+    if(patientStressData.length> 0){
+      patientStressData.forEach(stressData =>{
+        var date = new Date(stressData.timeStamp.substring(0, 19));
+        var day = date.getDay();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+  
+        var datapoint = {
+          stressValue: stressData.stressValue,
+          timeStamp: hours.toString()+":"+minutes.toString()
+        }
+        testData.push(datapoint);
+      });
+      setData(testData)
+    }
+  },[patientStressData])
+
+  const getPatientStressData = async () =>{
+   await axios.get("https://localhost:44350/stressmeasurements/patient/"+patientId).then((res)=>{
+      setPatientStressData([...res.data])
+    })
+  }
   
   
   return (
@@ -34,7 +53,7 @@ const App = ({patientId}) => {
         <LineChart
           width={500}
           height={300}
-          data={testData}
+          data={data}
           margin={{
             top: 10,
             right: 30,
