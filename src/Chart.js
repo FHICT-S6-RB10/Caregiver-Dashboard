@@ -39,7 +39,7 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:44350/stressmeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }
@@ -48,9 +48,10 @@ const App = ({patientId}) => {
   return (
 
     <div className="responsiveContainerDiv">
-    <ResponsiveContainer width="85%" aspect={3}>
+    <ResponsiveContainer width="85%" aspect={3} >
       
         <LineChart
+          allowDataOverflow={true}
           width={500}
           height={300}
           data={data}
@@ -67,7 +68,8 @@ const App = ({patientId}) => {
               </XAxis>
               <YAxis label={{ value: 'Stress Level', angle: -90, position: 'insideLeft' }}/>
               <Tooltip />
-              <Line type="monotone" dataKey="stressValue" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="heartRateVariability" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
+              {/* we have onClick  */}
         </LineChart>
       </ResponsiveContainer>
       </div>
