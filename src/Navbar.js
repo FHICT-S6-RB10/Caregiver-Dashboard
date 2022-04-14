@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Dropdown from "./Dropdown";
 import AlertButton from "./AlertButton";
 import axios from "axios";
+import SearchBar from "./SearchBar";
 
 const groups = [
     {
@@ -46,13 +47,8 @@ const Navbar = () => {
             <div className="links">
                 {/* <Link to="/logout">Logout</Link> */}
             </div>
-            <div className="search">
-                    <input 
-                        className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
-                        type = "search"
-                        placeholder = "Search People and Groups"
-                    />
-                    <button>Search</button>
+            <div className="searchBar">
+              <SearchBar />
             </div>
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
