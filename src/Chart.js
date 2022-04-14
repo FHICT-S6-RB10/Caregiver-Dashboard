@@ -19,17 +19,16 @@ const App = ({patientId}) => {
   },[])
 
   useEffect(()=>{
-    console.log(patientStressData)
     if(patientStressData.length> 0){
-      patientStressData.forEach(stressData =>{
+      patientStressData.slice(0,100).forEach(stressData =>{
         var date = new Date(stressData.timeStamp.substring(0, 19));
         var day = date.getDay();
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var seconds = date.getSeconds();
-  
+        
         var datapoint = {
-          stressValue: stressData.stressValue,
+          stressValue: stressData.heartRateVariability,
           timeStamp: hours.toString()+":"+minutes.toString()
         }
         testData.push(datapoint);
@@ -39,7 +38,7 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:44350/stressmeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }
@@ -48,9 +47,10 @@ const App = ({patientId}) => {
   return (
 
     <div className="responsiveContainerDiv">
-    <ResponsiveContainer width="85%" aspect={3}>
+    <ResponsiveContainer width="85%" aspect={3} >
       
         <LineChart
+          allowDataOverflow={true}
           width={500}
           height={300}
           data={data}
@@ -68,6 +68,7 @@ const App = ({patientId}) => {
               <YAxis label={{ value: 'Stress Level', angle: -90, position: 'insideLeft' }}/>
               <Tooltip />
               <Line type="monotone" dataKey="stressValue" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
+              {/* we have onClick  */}
         </LineChart>
       </ResponsiveContainer>
       </div>
