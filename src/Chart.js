@@ -19,17 +19,16 @@ const App = ({patientId}) => {
   },[])
 
   useEffect(()=>{
-    console.log(patientStressData)
     if(patientStressData.length> 0){
-      patientStressData.forEach(stressData =>{
+      patientStressData.slice(0,100).forEach(stressData =>{
         var date = new Date(stressData.timeStamp.substring(0, 19));
         var day = date.getDay();
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var seconds = date.getSeconds();
-  
+        
         var datapoint = {
-          stressValue: stressData.stressValue,
+          stressValue: stressData.heartRateVariability,
           timeStamp: hours.toString()+":"+minutes.toString()
         }
         testData.push(datapoint);
@@ -68,7 +67,7 @@ const App = ({patientId}) => {
               </XAxis>
               <YAxis label={{ value: 'Stress Level', angle: -90, position: 'insideLeft' }}/>
               <Tooltip />
-              <Line type="monotone" dataKey="heartRateVariability" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="stressValue" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
               {/* we have onClick  */}
         </LineChart>
       </ResponsiveContainer>
