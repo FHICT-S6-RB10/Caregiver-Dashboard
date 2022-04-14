@@ -19,10 +19,6 @@ By default, it will install all modules listed as dependencies in 'package.json'
 ### `npm start`
 
 Runs the app in the development mode.\
-
-### `npm start`
-
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload if you make changes.\
