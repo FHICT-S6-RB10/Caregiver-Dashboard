@@ -12,7 +12,6 @@ const Patient = () => {
 
     useEffect(()=>{
         getPatients()
-        console.log(patients)
     },[])
 
     const getPatients = async () =>{

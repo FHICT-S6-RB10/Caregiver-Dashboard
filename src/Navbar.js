@@ -4,7 +4,6 @@ import Dropdown from "./Dropdown";
 import AlertButton from "./AlertButton";
 import axios from "axios";
 import Select from 'react-select';
-import { useHistory } from 'react-router-dom';
 
 const groups = [
     {
@@ -28,7 +27,6 @@ const Navbar = () => {
   var testData = [];
   const [patients, setPatients] = useState([])
   const [data,setData] = useState([])
-  const history = useHistory();
 
     useEffect(()=>{
         getPatients()
@@ -52,20 +50,8 @@ const Navbar = () => {
           testData.push(datapoint);
         });
         setData(testData)
-        console.log(testData)
       }
     },[patients])
-
-    function handleChangeName(id) {
-
-      console.log(id);
-      //history.push('patient/'+id);
-      // <Link to={'/patient/'+id}>
-      //   Profile
-      // </Link>
-      
-      
-    }
 
     return (
 
@@ -79,7 +65,6 @@ const Navbar = () => {
                 {/* <Link to="/logout">Logout</Link> */}
             </div>
             <div className="searchBar">
-              {console.log(data)}
               <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             <div className="container">
