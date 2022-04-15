@@ -37,8 +37,6 @@ function App() {
       </Row>
     </Container>
       
-      {/* <RightNav /> */}
-      
       
       
     </div>

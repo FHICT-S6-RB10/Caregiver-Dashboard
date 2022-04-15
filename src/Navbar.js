@@ -4,6 +4,7 @@ import Dropdown from "./Dropdown";
 import AlertButton from "./AlertButton";
 import axios from "axios";
 import Select from 'react-select';
+import { useHistory } from 'react-router-dom';
 
 const groups = [
     {
@@ -21,19 +22,13 @@ const groups = [
   
   ];
 
-  const aquaticCreatures = [
-    { label: 'Shark', value: 'Shark' },
-    { label: 'Dolphin', value: 'Dolphin' },
-    { label: 'Whale', value: 'Whale' },
-    { label: 'Octopus', value: 'Octopus' },
-    { label: 'Crab', value: 'Crab' },
-    { label: 'Lobster', value: 'Lobster' },
-  ];
+
 
 const Navbar = () => {
   var testData = [];
   const [patients, setPatients] = useState([])
   const [data,setData] = useState([])
+  const history = useHistory();
 
     useEffect(()=>{
         getPatients()
@@ -50,6 +45,7 @@ const Navbar = () => {
         patients.forEach(patient =>{      
           
           var datapoint = {
+            id: patient.id.toString(),
             label: patient.firstName.toString(),
             value: patient.lastName.toString()
           }
@@ -60,12 +56,23 @@ const Navbar = () => {
       }
     },[patients])
 
+    function handleChangeName(id) {
+
+      console.log(id);
+      //history.push('patient/'+id);
+      // <Link to={'/patient/'+id}>
+      //   Profile
+      // </Link>
+      
+      
+    }
+
     return (
 
         <nav className="navbar">
             <Link to="/">
             <h1>
-                MoveSense
+                SWSP
             </h1>
             </Link>
             <div className="links">
@@ -73,7 +80,7 @@ const Navbar = () => {
             </div>
             <div className="searchBar">
               {console.log(data)}
-              <Select options={data}/>
+              <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
