@@ -1,7 +1,5 @@
 import './App.scss';
-import useFetch from './useFetch';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Label } from 'recharts';
-import { format } from 'date-fns-tz';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -22,10 +20,10 @@ const App = ({patientId}) => {
     if(patientStressData.length> 0){
       patientStressData.slice(0,100).forEach(stressData =>{
         var date = new Date(stressData.timeStamp.substring(0, 19));
-        var day = date.getDay();
+        //var day = date.getDay();
         var hours = date.getHours();
         var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
+        //var seconds = date.getSeconds();
         
         var datapoint = {
           stressValue: stressData.heartRateVariability,

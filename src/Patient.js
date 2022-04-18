@@ -12,7 +12,6 @@ const Patient = () => {
 
     useEffect(()=>{
         getPatients()
-        console.log(patients)
     },[])
 
     const getPatients = async () =>{
@@ -30,7 +29,6 @@ const Patient = () => {
                     <div className="details" key={patient.id}>
                         <h2>Patient {patient.firstName} {patient.lastName}</h2>
                         <p>Date of Birth: {patient.birthdate.substring(0, 10)}</p>
-                        <p>Email: {patient.emailAddress}</p>
                     </div>
                 )
             }
