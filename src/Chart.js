@@ -36,7 +36,7 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:5031/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }

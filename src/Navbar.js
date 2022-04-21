@@ -33,7 +33,7 @@ const Navbar = () => {
     },[])
 
     const getPatients = async () =>{
-      await axios.get("https://localhost:44350/patients").then((res)=>{
+      await axios.get("https://localhost:5031/patients").then((res)=>{
          setPatients([...res.data])
        })
   }
