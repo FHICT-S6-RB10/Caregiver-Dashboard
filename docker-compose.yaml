@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  movesensegroup3:
+    build: .
+    container_name: Caregiver_Dashboard
+    ports:
+      - 3000:3000 
+    stdin_open: true
+    tty: true
