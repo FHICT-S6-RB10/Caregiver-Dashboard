@@ -6,6 +6,12 @@ This is the frontend for the Stress service - the caregiver dashboard. It shows 
 
 First you need to install [NPM](https://www.npmjs.com/)
 
+## How to start in Docker
+
+In the project root directory you can run:
+### `docker compose up`
+
+
 ## How to run
 
 Open a Terminal\
