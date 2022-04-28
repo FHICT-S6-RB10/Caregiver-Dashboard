@@ -3,7 +3,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-
 const App = ({patientId}) => {
 
   var testData = [];
@@ -12,7 +11,6 @@ const App = ({patientId}) => {
   const [patientStressData, setPatientStressData] = useState([])
   useEffect(()=>{
     getPatientStressData()
-    
 
   },[])
 
