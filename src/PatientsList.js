@@ -7,10 +7,8 @@ const PatientsList = ({ patients }) => {
     //
     var testData = [];
     var testPatientsIds =[];
-    const [patientId,setPatientId] = useState([])
-    const [patientsIds,setPatientsIds] = useState([])
-    const [data, setData] = useState([])
-    const [idData, setIdData] = useState([])
+    const [patientsIds, setPatientsIds] = useState([])
+    const [stressdataPerPatient, setStressdataPerPatient] = useState([])
     const [patientStressData, setPatientStressData] = useState([])
     useEffect(()=>{
         patients.forEach(patient =>{ 
@@ -28,9 +26,9 @@ const PatientsList = ({ patients }) => {
             getPatientStressData(id)
             // for each again to get the HRV and timestamp
         });
-        console.log(patientsIds)  
+        console.log(stressdataPerPatient)
             }
-        },[patientsIds])
+        },[])
 
     const getPatientStressData = async (id) => {
         await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+id).then((res)=>{
@@ -39,10 +37,11 @@ const PatientsList = ({ patients }) => {
             var datapoint = {
                 patientId: id, 
                 stressValue: patientStressData.heartRateVariability,
-                timeStamp: patientStressData.timeStamp,
+                timeStamp: patientStressData.timeStamp
             }
-            console.log(datapoint)
+            testData.push(datapoint)
          })
+         setStressdataPerPatient(testData)
          })
        }
        
