@@ -6,29 +6,64 @@ const PatientsList = ({ patients }) => {
     //We can also write (props) and its going to work the same way, but giving all props 
     //
     var testData = [];
+    var testStressedPatient = [];
+    var normalizedStressPatientList = [];
     var testPatientsIds =[];
     const [patientsIds, setPatientsIds] = useState([])
+    const [allStressedPatients, setAllStressedPatients] = useState([])
     const [stressdataPerPatient, setStressdataPerPatient] = useState([])
     const [patientStressData, setPatientStressData] = useState([])
     useEffect(()=>{
         patients.forEach(patient =>{ 
             var patientId = patient.id
-            setPatientsIds(patientId)
             testPatientsIds.push(patientId)
         });
         setPatientsIds(testPatientsIds)
         },[patients])
     
     useEffect(()=>{
+        console.log(patientsIds)
         if(patientsIds.length > 0){
             patientsIds.forEach(id => {
                 //attach id to a new variable
             getPatientStressData(id)
             // for each again to get the HRV and timestamp
         });
-        console.log(stressdataPerPatient)
+        console.log(stressdataPerPatient);
+        if(stressdataPerPatient.length > 0){
+            console.log("Successfully")
+            stressdataPerPatient.forEach(patient => {
+                if (patient.stressValue > 88) {
+                    console.log(patient.stressValue + "- stress" + patient.patientId + "- id ")
+                    var stressedPatient = {
+                        id: patient.patientId,
+                        stressValue: patient.stressValue,
+                        timeStamp: patient.timeStamp
+                }
+                testStressedPatient.push(stressedPatient)
             }
+        })
+        console.log(testStressedPatient)
+        normalizedStressPatientList = getUnique(testStressedPatient, 'id')
+        setAllStressedPatients(normalizedStressPatientList) 
+        } 
+        //console.log(stressdataPerPatient)
+        }
         },[])
+
+        function getUnique(arr, index) {
+
+            const unique = arr
+                 .map(e => e[index])
+          
+                 // store the keys of the unique objects
+                 .map((e, i, final) => final.indexOf(e) === i && i)
+          
+                 // eliminate the dead keys & store unique objects
+                .filter(e => arr[e]).map(e => arr[e]);      
+          
+             return unique;
+          }
 
     const getPatientStressData = async (id) => {
         await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+id).then((res)=>{
@@ -41,39 +76,38 @@ const PatientsList = ({ patients }) => {
             }
             testData.push(datapoint)
          })
+         console.log("Logging testData")  
          setStressdataPerPatient(testData)
          })
        }
-       
-       useEffect(()=>{
-        if(patientStressData.length> 0){
-          // console.log(patientStressData)
-            if (patientStressData.heartRateVariability > 60) {
-
-           // console.log(patientStressData.heartRateVariability.toString())
-            // create a pop up with patient name and default msg?
-            // Patient name<id> is very stressed and requires attention!
-            }
-        }
-      },[patientStressData])
 
     return ( 
 
         <div className="patients-list">
             
             {/* {
-                1. get patient stress lvl - map patient id to their stress lvl
-                2. check if stress lvl is above ~78
-                3. generate a pop up if true
-                4. change background color of alert btn
+                1. get username from id
+                2. fix background color
+                3. fix navbar
+                4. fix alert counter
             } */}
+            {
+                console.log(allStressedPatients)
+            }
+            {allStressedPatients && allStressedPatients.map((patient) => (
+                <div className="patients-preview" style={{background: '#F2B8C6'}} >
+                    <Link className="links" to={`/patient/${patient.id}`}>
+                    <h2>High Stress Alert</h2>
+                    <h3>{ patient.id } { patient.stressValue}</h3>
+                    </Link>
+                </div>
+            ))}
 
-            {patients && patients.slice(0, 8).map((patient) => (
+            {patients && patients.slice(0, 2).map((patient) => (
                 <div className="patients-preview" key={patient.id}>
                     <Link className="links" to={`/patient/${patient.id}`}>
                     <h2>New Patient Has Been Added:</h2>
                     <h3>{ patient.firstName } { patient.lastName}</h3>
-                    
                     </Link>
                 </div>
             ))}
