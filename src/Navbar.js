@@ -23,7 +23,7 @@ const groups = [
 
 
 
-const Navbar = () => {
+const Navbar = ({notificationsCounter}) => {
   var testData = [];
   const [patients, setPatients] = useState([])
   const [data,setData] = useState([])
@@ -70,7 +70,7 @@ const Navbar = () => {
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
                 <Link to="/">
-                <AlertButton />
+                <AlertButton counter={notificationsCounter}/>
                 </Link>
             </div>
 

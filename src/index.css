@@ -29,12 +29,15 @@ code {
 }
 .navbar {
   top:0;
+  left: 0;
+  bottom: 0;
   padding: 0px 20px 0px 20px;
   float: left;
   /* display: flex; */
+  position: fixed;
   align-items: center;
   width: 25%;
-  min-height: 100vh;
+  height: 100vh;
   max-width: 26%;
   /* background-color: #fafafad3; */
   background-color: #f2f2f2;
@@ -70,9 +73,21 @@ code {
   background-size: 70px 70px;
   cursor: pointer;
   box-shadow: 3px 3px 5px 3px #757575;
-} 
+}
+.navbar .alertButton:hover {
+  background-image: url('../images/bell_alert.png');
+}
+.navbar .alertButton .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  }
 .content {
-  float: left;
+  float: right;
   top: 0;
   height: 100vh;
   width: 72%;
@@ -83,6 +98,16 @@ code {
 }
 
 /* patients preview */
+.attention{
+
+  background-color: #F2B8C6;
+
+}
+.normal{
+
+  background-color: #cae8c1;
+
+}
 .patients-preview {
   width: 70%;
   text-decoration: none;
@@ -90,7 +115,7 @@ code {
   margin: 20px auto;
   border-bottom: 1px solid #fafafa;
   border-radius: 22px;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 }
 .patients-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect,useState } from "react";
 import axios from "axios";
+import AlertButton from "./AlertButton";
+import Navbar from "./Navbar";
 
 const PatientsList = ({ patients }) => {
     //We can also write (props) and its going to work the same way, but giving all props 
@@ -19,11 +21,13 @@ const PatientsList = ({ patients }) => {
             testPatientsIds.push(patientId)
         });
         setPatientsIds(testPatientsIds)
+        console.log("setting Patient Ids")
         console.log(testPatientsIds)
-        },[patients])
+        },[])
     
     useEffect(()=>{
         console.log(patientsIds)
+        console.log("patients Ids checking")
         if(patientsIds.length > 0){
             patientsIds.forEach(id => {
                 //attach id to a new variable
@@ -73,40 +77,42 @@ const PatientsList = ({ patients }) => {
             var datapoint = {
                 patientId: id, 
                 stressValue: patientStressData.heartRateVariability,
-                timeStamp: patientStressData.timeStamp
+                timeStamp: patientStressData.timeStamp 
             }
             testData.push(datapoint)
          })
          console.log("Logging testData")
          console.log(testData)
-         setStressdataPerPatient(testData)
+         setStressdataPerPatient(testData) 
          })
        }
 
     return ( 
 
         <div className="patients-list">
-            
-            {/* {
-                1. get username from id
-                2. fix background color
-                3. fix navbar
-                4. fix alert counter
-            } */}
+            <Navbar notificationsCounter={allStressedPatients.length}/> 
             {
                 console.log(allStressedPatients)
             }
-            {allStressedPatients && allStressedPatients.map((patient) => (
-                <div className="patients-preview" style={{background: '#F2B8C6'}} >
-                    <Link className="links" to={`/patient/${patient.id}`}>
-                    <h2>High Stress Alert</h2>
-                    <h3>{ patient.id } { patient.stressValue}</h3>
-                    </Link>
+            {allStressedPatients && allStressedPatients.map((stressedPatient) => (
+                <div className="patients-preview attention" >
+                    
+                    {
+                        patients && patients.filter(patient => patient.id === stressedPatient.id).map((patient) => (
+                            <Link className="links" to={`/patient/${stressedPatient.id}`}>
+                                <h2>High Stress Alert</h2>
+                                <Link className="links" to={`/patient/${patient.id}`}>
+                                    <h3>{patient.firstName} { patient.lastName } { stressedPatient.stressValue}</h3>
+                                </Link>
+                            </Link>  
+                        ))
+                    }
+                    
                 </div>
             ))}
 
             {patients && patients.slice(0, 2).map((patient) => (
-                <div className="patients-preview" key={patient.id}>
+                <div className="patients-preview normal" key={patient.id}>
                     <Link className="links" to={`/patient/${patient.id}`}>
                     <h2>New Patient Has Been Added:</h2>
                     <h3>{ patient.firstName } { patient.lastName}</h3>
