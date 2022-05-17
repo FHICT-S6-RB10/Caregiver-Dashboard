@@ -19,6 +19,7 @@ const PatientsList = ({ patients }) => {
             testPatientsIds.push(patientId)
         });
         setPatientsIds(testPatientsIds)
+        console.log(testPatientsIds)
         },[patients])
     
     useEffect(()=>{
@@ -47,7 +48,7 @@ const PatientsList = ({ patients }) => {
         normalizedStressPatientList = getUnique(testStressedPatient, 'id')
         setAllStressedPatients(normalizedStressPatientList) 
         } 
-        //console.log(stressdataPerPatient)
+        console.log(stressdataPerPatient)
         }
         },[])
 
@@ -76,7 +77,8 @@ const PatientsList = ({ patients }) => {
             }
             testData.push(datapoint)
          })
-         console.log("Logging testData")  
+         console.log("Logging testData")
+         console.log(testData)
          setStressdataPerPatient(testData)
          })
        }
