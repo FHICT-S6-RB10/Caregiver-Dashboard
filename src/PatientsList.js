@@ -15,30 +15,43 @@ const PatientsList = ({ patients }) => {
     const [allStressedPatients, setAllStressedPatients] = useState([])
     const [stressdataPerPatient, setStressdataPerPatient] = useState([])
     const [patientStressData, setPatientStressData] = useState([])
+    const [stressedPatients, setStressedPatients] = useState([])
+
+
     useEffect(()=>{
-        patients.forEach(patient =>{ 
-            var patientId = patient.id
-            testPatientsIds.push(patientId)
-        });
-        setPatientsIds(testPatientsIds)
-        console.log("setting Patient Ids")
-        console.log(testPatientsIds)
-        },[])
+        getStressedPatients(24)
+    },[])
+
+    useEffect(()=>{
+        if(patients.length > 0){
+            patients.slice(0, 20).forEach(patient =>{ 
+                var patientId = patient.id
+                testPatientsIds.push(patientId)
+            }); 
+            console.log("setting Patient Ids")
+            console.log(testPatientsIds)
+            setPatientsIds(testPatientsIds)
+        }
+        else
+        {
+            console.log("nope")
+        }
+    },[patients])
     
     useEffect(()=>{
         console.log(patientsIds)
         console.log("patients Ids checking")
-        if(patientsIds.length > 0){
-            patientsIds.forEach(id => {
+        if(patientsIds.length > 0){ 
+            patientsIds.forEach(id => {  
                 //attach id to a new variable
             getPatientStressData(id)
             // for each again to get the HRV and timestamp
         });
         console.log(stressdataPerPatient);
-        if(stressdataPerPatient.length > 0){
+        if(stressdataPerPatient.length > 0){ 
             console.log("Successfully")
             stressdataPerPatient.forEach(patient => {
-                if (patient.stressValue > 88) {
+                if (patient.stressValue <= 35) {
                     console.log(patient.stressValue + "- stress" + patient.patientId + "- id ")
                     var stressedPatient = {
                         id: patient.patientId,
@@ -71,11 +84,11 @@ const PatientsList = ({ patients }) => {
           }
 
     const getPatientStressData = async (id) => {
-        await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+id).then((res)=>{
+        await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+id).then((res)=>{
            setPatientStressData([...res.data])
-           patientStressData.forEach(patientStressData => {
+           patientStressData.slice(0, 20).forEach(patientStressData => {
             var datapoint = {
-                patientId: id,
+                patientId: id,  
                 stressValue: patientStressData.heartRateVariability,
                 timeStamp: patientStressData.timeStamp 
             }
@@ -86,30 +99,45 @@ const PatientsList = ({ patients }) => {
          setStressdataPerPatient(testData) 
          })
        }
+    
+    const getStressedPatients = async(value) => {
+        await axios.get("https://localhost:5001/patients/stressed/"+value).then((res) => {
+            setStressedPatients([...res.data])
+        })
+    }
 
     return ( 
-
+ 
         <div className="patients-list">
-            <Navbar notificationsCounter={allStressedPatients.length}/> 
-            {
-                console.log(allStressedPatients)
-            }
-            {allStressedPatients && allStressedPatients.map((stressedPatient) => (
+            <Navbar notificationsCounter={stressedPatients.length}/> 
+            {console.log(stressedPatients.length)}
+            
+            {/* {allStressedPatients && allStressedPatients.slice(0, 40).map((stressedPatient) => (
                 <div className="patients-preview attention" >
                     
-                    {
+                    {/* {
                         patients && patients.filter(patient => patient.id === stressedPatient.id).map((patient) => (
                             <Link className="links" to={`/patient/${stressedPatient.id}`}>
                                 <h2>High Stress Alert</h2>
                                 <Link className="links" to={`/patient/${patient.id}`}>
-                                    <h3>{patient.firstName} { patient.lastName } { stressedPatient.stressValue}</h3>
+                                    <h3>{ patient.firstName } { patient.lastName } { stressedPatient.stressValue}</h3>
                                 </Link>
                             </Link>  
                         ))
-                    }
+                    } */}
                     
-                </div>
-            ))}
+                {/* </div>
+            ))} */}
+            {
+                stressedPatients && stressedPatients.map((patient) => (
+                    <div className="patients-preview attention" key={patient.patientId}>
+                        <Link className="links" to={`/patient/${patient.patientId}`}>
+                            <h2>Stressed patient:</h2>
+                            <h3>{ patient.firstName } { patient.lastName} {patient.heartRateVariability}</h3>
+                        </Link>
+                    </div>
+                ))
+            }
 
             {patients && patients.slice(0, 2).map((patient) => (
                 <div className="patients-preview normal" key={patient.id}>

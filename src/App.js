@@ -8,9 +8,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
 
-  // const { data } = useFetch('https://localhost:44350/patients');
+  // const { data } = useFetch('https://localhost:5001/patients');
 
-  // const { data:stressdata } = useFetch('https://localhost:44350/stressmeasurements');
+  // const { data:stressdata } = useFetch('https://localhost:5001/stressmeasurements');
 
   // const {data:stressDataPerPatient} = useFetch('');
 

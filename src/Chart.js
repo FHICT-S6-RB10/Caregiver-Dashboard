@@ -7,7 +7,7 @@ const App = ({patientId}) => {
 
   var testData = [];
   const [data,setData] = useState([])
-  //const { data:patientStressData, isPending, error } = useFetch("https://localhost:44350/stressmeasurements/patient/"+patientId);
+  //const { data:patientStressData, isPending, error } = useFetch("https://localhost:5001/stressmeasurements/patient/"+patientId);
   const [patientStressData, setPatientStressData] = useState([])
   useEffect(()=>{
     getPatientStressData()
@@ -34,7 +34,7 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:44350/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }
