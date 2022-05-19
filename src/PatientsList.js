@@ -75,7 +75,7 @@ const PatientsList = ({ patients }) => {
            setPatientStressData([...res.data])
            patientStressData.forEach(patientStressData => {
             var datapoint = {
-                patientId: id, 
+                patientId: id,
                 stressValue: patientStressData.heartRateVariability,
                 timeStamp: patientStressData.timeStamp 
             }
