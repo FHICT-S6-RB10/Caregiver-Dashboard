@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders movesense link', () => {
+test('renders swsp link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/movesense/i);
+  const linkElement = screen.getByText(/swsp/i);
   expect(linkElement).toBeInTheDocument();
 });
