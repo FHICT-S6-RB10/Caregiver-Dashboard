@@ -1,19 +1,24 @@
 import { useEffect, useMemo } from "react";
 
-const AlertButton = ({counter}) => {
+const AlertButton = () => {
+    //console.log(localStorage.getItem('number'))
 
-    useEffect(() => {
-        localStorage.setItem('counter', counter);
-    }, [counter])
+    // useEffect(() => {
+    //     sessionStorage.setItem('counter', JSON.stringify(counter));
+    //     if(counter) {
+    //         sessionStorage.setItem('counter', counter);
+    //       }
+    // }, [counter])
 
-    const constCounter = useMemo(() => {
-        return counter 
-    }, [counter]); 
+    // console.log(counter);
+
+    // const constCounter = useMemo(() => {
+    //     return counter 
+    // }, [counter]); 
 
     return ( 
         <div className="alertButton">
-            
-            <span className="badge">{localStorage.getItem('counter')}</span>
+            <span className="badge">{localStorage.getItem('number')}</span>
         </div>
      );
 }

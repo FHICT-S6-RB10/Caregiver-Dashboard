@@ -19,13 +19,10 @@ const groups = [
       id: 3,
       value: 'Group 3',
     },
-  
+
   ];
 
-  
-
-const Navbar = ({notificationsCounter}) => {
-  
+const Navbar = () => {
   const { instance, accounts } = useMsal();
   function handleLogout(){
     instance.logoutRedirect().catch(
@@ -33,6 +30,9 @@ const Navbar = ({notificationsCounter}) => {
     );
   }
   
+  // //experiment
+  // const [stressedPatients, setStressedPatients] = useState([])
+  // const [number, setNumber] = useState([])
 
   var testData = [];
   const [patients, setPatients] = useState([])
@@ -43,10 +43,29 @@ const Navbar = ({notificationsCounter}) => {
     },[])
 
     const getPatients = async () =>{
-      await axios.get("https://localhost:5001/patients").then((res)=>{
+      await axios.get("https://localhost:5031/patients").then((res)=>{
          setPatients([...res.data])
        })
   }
+
+//     //experiment
+//   useEffect(()=>{
+//     getStressedPatients(24)
+//     console.log(stressedPatients);
+// },[])
+//   const getStressedPatients = async(value) => {
+//     await axios.get("https://localhost:5031/patients/stressed/"+value).then((res) => {
+//         setStressedPatients([...res.data])
+//     })
+// }
+// useEffect(() => { 
+//   setNumber(stressedPatients.length)
+//   console.log(stressedPatients.length)
+//   console.log(number)
+//   localStorage.setItem('number', (number.toString()));
+// },[number])
+
+
 
     useEffect(()=>{
       if(patients.length> 0){
@@ -74,9 +93,7 @@ const Navbar = ({notificationsCounter}) => {
             <div className="links">
                 {/* <Link to="/logout">Logout</Link> */}
             </div>
-            <button onClick={handleLogout}>
-                Logout
-            </button>
+            <button className="logoutButton" onClick={handleLogout}></button>
             <div className="searchBar">
               <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
@@ -84,7 +101,7 @@ const Navbar = ({notificationsCounter}) => {
             <div className="container">
                 <Dropdown title="Select group" groups={groups} patients={patients}/>
                 <Link to="/">
-                <AlertButton counter={notificationsCounter}/>
+                <AlertButton/>
                 </Link>
             </div>
 

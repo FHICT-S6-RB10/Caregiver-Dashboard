@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useFetch from "./useFetch";
+//import useFetch from "./useFetch";
 import Chart from "./Chart";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -15,7 +15,7 @@ const Patient = () => {
     },[])
 
     const getPatients = async () =>{
-        await axios.get("https://localhost:5001/patients").then((res)=>{
+        await axios.get("https://localhost:5031/patients").then((res)=>{
            setPatients([...res.data])
          })
     }

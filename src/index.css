@@ -19,13 +19,12 @@ code {
 .home h1{
   text-shadow: 1px 1px #757575;
   margin: 50px;
-
 }
-
 /* navbar base styles */
 * {
   margin: 0;
-  color: #333;
+  color: #8884d8;
+  /*color: #333;*/
 }
 .navbar {
   top:0;
@@ -46,6 +45,8 @@ code {
 .navbar h1 {
   font-size: 40px;
   color: #8884d8;
+  text-shadow: 1px 1px #757575;
+  margin: 50px;
 }
 .navbar .links {
   margin-left: 0 auto;
@@ -62,6 +63,21 @@ code {
 .navbar .search {
   margin-top: 20px;
 }
+.navbar .logoutButton{
+  position: fixed;
+  top: 40px;
+  left: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border:0;
+  background-image: url('../images/logoutbtn.png');
+  background-size: 70px 70px;
+}
+.navbar .logoutButton:hover{
+  cursor: pointer;
+  box-shadow: 3px 3px 5px 3px #757575;
+}
 .navbar .alertButton {
   position: absolute;
   bottom: 40px;
@@ -71,8 +87,6 @@ code {
   border-radius: 100%;
   background-image: url('../images/bell.png');
   background-size: 70px 70px;
-  cursor: pointer;
-  box-shadow: 3px 3px 5px 3px #757575;
 }
 .navbar .alertButton:hover {
   background-image: url('../images/bell_alert.png');
@@ -99,14 +113,10 @@ code {
 
 /* patients preview */
 .attention{
-
   background-color: #F2B8C6;
-
 }
 .normal{
-
   background-color: #cae8c1;
-
 }
 .patients-preview {
   width: 70%;
@@ -156,8 +166,6 @@ code {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
-
 .search button {
   text-align: center;
   height: 30px;

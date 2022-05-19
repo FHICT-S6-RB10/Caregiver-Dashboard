@@ -7,7 +7,6 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log('use effect ran');
         fetch(url)
             .then(res => {
                 if(!res.ok){
