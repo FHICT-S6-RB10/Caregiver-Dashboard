@@ -21,12 +21,17 @@ const App = ({patientId}) => {
         //var day = date.getDay();
         var hours = date.getHours();
         var minutes = date.getMinutes();
+        console.log(minutes);
+        if(minutes===0){
+          minutes = "00";
+        }
         //var seconds = date.getSeconds();
         
         var datapoint = {
           stressValue: stressData.heartRateVariability,
           timeStamp: hours.toString()+":"+minutes.toString()
         }
+        console.log(datapoint.timeStamp)
         testData.push(datapoint);
       });
       setData(testData)
@@ -34,7 +39,7 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:5031/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }
@@ -43,7 +48,7 @@ const App = ({patientId}) => {
   return (
 
     <div className="responsiveContainerDiv">
-    <ResponsiveContainer width="85%" aspect={3} >
+    <ResponsiveContainer width="85%" aspect={3}>
       
         <LineChart
           allowDataOverflow={true}
@@ -54,14 +59,14 @@ const App = ({patientId}) => {
             top: 10,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 50,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="timeStamp">
-                  <Label value="Time" offset={0} position="insideBottom"/>
+              <XAxis fontSize={17} dataKey="timeStamp">
+                  <Label value="Time" offset={-16} position="insideBottom"/>
               </XAxis>
-              <YAxis label={{ value: 'Stress Level', angle: -90, position: 'insideLeft' }}/>
+              <YAxis label={{ value: 'HRV', angle: -90, position: 'insideLeft' }}/>
               <Tooltip />
               <Line type="monotone" dataKey="stressValue" stroke="#8884d8" fill="#8884d8" fillOpacity={1} activeDot={{ r: 8 }} />
               {/* we have onClick  */}

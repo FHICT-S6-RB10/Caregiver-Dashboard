@@ -30,42 +30,20 @@ const Navbar = () => {
     );
   }
   
-  // //experiment
-  // const [stressedPatients, setStressedPatients] = useState([])
-  // const [number, setNumber] = useState([])
-
   var testData = [];
   const [patients, setPatients] = useState([])
   const [data,setData] = useState([])
 
     useEffect(()=>{
         getPatients()
+        
     },[])
 
     const getPatients = async () =>{
-      await axios.get("https://localhost:5031/patients").then((res)=>{
+      await axios.get("https://localhost:5001/patients").then((res)=>{
          setPatients([...res.data])
        })
   }
-
-//     //experiment
-//   useEffect(()=>{
-//     getStressedPatients(24)
-//     console.log(stressedPatients);
-// },[])
-//   const getStressedPatients = async(value) => {
-//     await axios.get("https://localhost:5031/patients/stressed/"+value).then((res) => {
-//         setStressedPatients([...res.data])
-//     })
-// }
-// useEffect(() => { 
-//   setNumber(stressedPatients.length)
-//   console.log(stressedPatients.length)
-//   console.log(number)
-//   localStorage.setItem('number', (number.toString()));
-// },[number])
-
-
 
     useEffect(()=>{
       if(patients.length> 0){
@@ -74,7 +52,7 @@ const Navbar = () => {
           var datapoint = {
             id: patient.id.toString(),
             label: patient.firstName.toString(),
-            value: patient.lastName.toString()
+            value: patient.lastName.toString() 
           }
           testData.push(datapoint);
         });
