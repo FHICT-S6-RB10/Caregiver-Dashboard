@@ -7,6 +7,6 @@ const AlertButton = () => {
             <span className="badge">{localStorage.getItem('number')}</span>
         </div>
      );
-}
+} 
 
 export default AlertButton;
