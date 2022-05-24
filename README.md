@@ -5,12 +5,12 @@ This is the dashboard that caregivers use to view patients' stress data.
 ## Set up local working environment
 First you need to install [NPM](https://www.npmjs.com/)
 
-## How to start in Docker
+## How to start in a Docker container
 In the project root directory you can run:
 ```
 docker compose up
 ```
-## How to run
+## How to run from CLI
 
 Open a CLI in the project root directory and run:
 ```
