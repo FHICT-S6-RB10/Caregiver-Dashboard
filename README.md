@@ -1,6 +1,7 @@
 # Caregiver-Dashboard
 ## Port: 3000
-This is the dashboard that caregivers use to view patients' stress data.
+This is the dashboard that caregivers use to view patients' stress data. \
+This gets stress data from the Stress Data Service, patients from the Patient Service and patient groups from the Patient Group Service.
 
 ## Set up local working environment
 First you need to install [NPM](https://www.npmjs.com/)
