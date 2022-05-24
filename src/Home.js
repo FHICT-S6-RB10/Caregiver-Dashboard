@@ -10,7 +10,7 @@ import AlertButton from "./AlertButton";
 const Home = () => {
 
     const { instance } = useMsal()
-    const { data, isPending, error } = useFetch('https://localhost:5051/api/patients');
+    const { data, isPending, error } = useFetch('https://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     const [number, setNumber] = useState([])
 
