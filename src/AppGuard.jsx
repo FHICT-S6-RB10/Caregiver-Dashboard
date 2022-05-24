@@ -14,7 +14,6 @@ export const AppGuard = (props) => {
         }
 
         const currentAccount = instance.getActiveAccount()
-        console.log(currentAccount)
 
         if (currentAccount && currentAccount.idTokenClaims['roles']) {
             let intersection = props.roles

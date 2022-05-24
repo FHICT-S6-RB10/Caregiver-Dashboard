@@ -99,7 +99,31 @@ code {
   border-radius: 50%;
   background-color: red;
   color: white;
-  }
+}
+.clearButton{
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border:0;
+  background-image: url('../images/clearbtn.png');
+  background-size: 70px 70px;
+}
+.deleteButton{
+  width: 30px;
+  height: 30px;
+  border:0;
+  border-radius: 100%;
+  background-image: url('../images/cross.png');
+  background-size: 30px 30px;
+  float: right;
+}
+.clearButton:hover{
+  cursor: pointer;
+  box-shadow: 3px 3px 5px 3px #757575;
+}
 .content {
   float: right;
   top: 0;
@@ -156,7 +180,7 @@ code {
   margin-bottom: 8px;
 }
 .search input {
-  float: left;
+  /* loat: left; */
   height: 30px;
   width: 100%;
   padding: 12px 20px;

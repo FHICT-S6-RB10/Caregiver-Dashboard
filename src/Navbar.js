@@ -29,7 +29,7 @@ const Navbar = () => {
       console.error
     );
   }
-  
+
   var testData = [];
   const [patients, setPatients] = useState([])
   const [data,setData] = useState([])
@@ -68,11 +68,7 @@ const Navbar = () => {
                 SWSP
             </h1>
             </Link>
-            <div className="links">
-                {/* <Link to="/logout">Logout</Link> */}
-            </div>
-            <button className="logoutButton" onClick={handleLogout}></button>
-            <div className="searchBar">
+            <button className="logoutButton" onClick={handleLogout}></button>            <div className="searchBar">
               <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             
