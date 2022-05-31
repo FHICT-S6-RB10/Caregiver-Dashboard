@@ -4,20 +4,26 @@ import useFetch from "./useFetch";
 import axios from "axios";
 import { useMsal } from "@azure/msal-react";
 import AlertButton from "./AlertButton";
+import { callMsGraph } from "./graph.tsx";
 
 
 
 const Home = () => {
 
-    const { instance } = useMsal()
-    const { data, isPending, error } = useFetch('https://localhost:3030/api/patients');
+    const { instance, accounts } = useMsal()
+    const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     const [number, setNumber] = useState([])
+    const [patients, setPatients] = useState([])
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
+
 
     useEffect(()=>{
-        getStressedPatients(24); 
+        getStressedPatients(24)
     },[])
 
+    
+ 
     useEffect(()=>{
         if(stressedPatients.length > 0){
             setNumber(stressedPatients.length)
