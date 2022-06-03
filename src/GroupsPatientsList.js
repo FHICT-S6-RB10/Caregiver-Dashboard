@@ -7,16 +7,13 @@ const GroupsPatientsList = ({ patients }) => {
     return (         
         <div className="patients-list">
             {patients && patients.map((patient) => (
-                <div className="patients-preview normal" key={patient.id}>
+                <div className="dd-list" key={patient.id}>
                     <Link className="links" to={`/patient/${patient.id}`}>
-                    <h2></h2>
                     <h3>{ patient.firstName } { patient.lastName}</h3>
                     </Link>
                 </div>
             ))}
-
         </div>
-
      );
 }
  

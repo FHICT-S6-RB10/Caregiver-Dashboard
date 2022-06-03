@@ -76,9 +76,8 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
                 <li className="dd-list-item" key={group.id}>
                     <Link to={`/groupPatients/${group.id}`}>
                     <button type="button" onClick={() => handleOnCLick(group)}>
-                        
-                        <span>{group.groupName}</span>
-                       
+                        <div>{group.groupName}</div>
+                        <div className="right-arrow"> </div>
                     </button>
                     </Link>
                 </li>

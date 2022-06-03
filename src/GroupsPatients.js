@@ -16,7 +16,6 @@ const GroupsPatients = ({}) => {
     const { id } = useParams()
 
     const { instance, accounts } = useMsal()
-    const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
@@ -87,11 +86,6 @@ const GroupsPatients = ({}) => {
                     Welcome, { instance.getActiveAccount().name }
                 </h1>
                 {
-                    
-                }
-                { error && <div>{error}</div>}
-                { isPending &&<div>Loading...</div>}
-                {!isPending &&
                 <GroupsPatientsList patients={patientGroupsPatients} title="All Patients"/>
                 }
                 {console.log(patientGroupsPatients)}

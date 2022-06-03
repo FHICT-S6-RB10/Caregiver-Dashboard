@@ -120,9 +120,16 @@
         &:hover, &:focus {
           cursor: pointer;
           font-weight: bold;
-          background-color: #fafafa;
+          background-color: #fcE0f8;
         }
       }
+      .right-arrow{
+        width: 20px;
+        height: 20px;
+        background-image: url('../images/right-arrow.png');
+        background-size: 20px 20px;
+      }
     }
+
   }
 }
