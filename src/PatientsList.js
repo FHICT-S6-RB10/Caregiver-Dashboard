@@ -22,7 +22,7 @@ const PatientsList = ({ patients, stressedPatients }) => {
                 ))
             }
 
-            {patients && patients.slice(0, 2).map((patient) => (
+            {patients && patients.map((patient) => (
                 <div className="patients-preview normal" key={patient.id}>
                     <Link className="links" to={`/patient/${patient.id}`}>
                     <h2>New Patient Has Been Added:</h2>

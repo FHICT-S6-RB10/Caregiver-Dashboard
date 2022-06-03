@@ -15,79 +15,19 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
-    const [patientGroupsPatients, setPatientGroupsPatients] = useState([])
-    const [groupId, setGroupId] = useState([])
+   
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
 
     Dropdown.handleClickOutside = () => setOpen(false);
 
-    useEffect(() => {
-        ;
-    },[groups])
 
-    const callApi = async ({ token, apiUrl, path, method, body } ) => {
-        const url = `${apiUrl ? apiUrl : API_URL}/${path}`
     
-        const fetchOptions = {
-            method,
-            headers: { 
-                "Content-type": "application/json",
-                "Authorization": "Bearer " + token
-            }
-        }
-    
-        if (body) fetchOptions.body = typeof body === 'string' ? body : JSON.stringify(body)
-    
-        console.log(body)
-    
-        try {
-            const response = await fetch(url, fetchOptions);
-            if (!response.ok)
-                throw Error(`${response.status}|${response.statusText}`);
-            const response_1 = await response.text();
-            return ({
-                error: false,
-                response: response_1 && response_1.length > 0 ? JSON.parse(response_1) : {}
-            });
-        } catch (e) {
-            return {
-                error: true,
-                response: e
-            };
-        }
-    }
-
-    const getPatientsGroupsPatients = (accessToken) => {
-        return callApi({ token: accessToken, path: "patient-groups/"+groupId+"/patients", method: 'GET' })
-      }
-    
-      const fetchPatientsGroupsPatients = () => {
-        instance.acquireTokenSilent(request).then(res => {
-          getPatientsGroupsPatients(res.accessToken).then(response => {
-                console.log(response.response)
-                const foundPatientGroupsPatients = response.response
-                setPatientGroupsPatients([...foundPatientGroupsPatients])
-            })
-        }).catch((err) => {
-            console.error('Error occurred while fetching patients', err)
-        })
-        .catch((e) => {
-          instance.acquireTokenPopup(request).then(console.log)})
-    }
-    
-      const request = {
-          scopes: ["api://5720ed34-04b7-4397-9239-9eb8581ce2b7/access_as_caregiver", "User.Read"],
-          account: accounts[0]
-      };
 
     function handleOnCLick(group) {
         if (!selection.some(current => current.id === group.id))
         {
-            console.log(group.id);
-            setGroupId(group.id);
-            console.log(patients.id);
             if(group.id){
-                fetchPatientsGroupsPatients()
+                setSelection([group])
             }
             if(!multiSelect){
                 setSelection([group]);
@@ -134,17 +74,13 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
                 
                 {groups.map(group => (
                 <li className="dd-list-item" key={group.id}>
+                    <Link to={`/groupPatients/${group.id}`}>
                     <button type="button" onClick={() => handleOnCLick(group)}>
-                        <span>{group.groupName}</span>
-                        <span>{group.id && isItemInSelection(group) && patientGroupsPatients.slice(0, 10).map(
-                           patient => ( 
-                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
-                                )
-                            )
-                        }
                         
-                        </span>
+                        <span>{group.groupName}</span>
+                       
                     </button>
+                    </Link>
                 </li>
                 ))}
                 </ul>
