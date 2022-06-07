@@ -62,6 +62,29 @@
   margin-top: 25px;
 }
 
+.alertButton {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background-image: url('../images/bell.png');
+  background-size: 70px 70px;
+}
+.alertButton:hover {
+  background-image: url('../images/bell_alert.png');
+}
+.alertButton .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+
 /* Dropdown */
 .dd-wrapper {
   display: flex;

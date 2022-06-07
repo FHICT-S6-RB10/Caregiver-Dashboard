@@ -5,6 +5,8 @@ import Home from './Home';
 import Patient from './Patient';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import GroupsPatients from './GroupsPatients';
+import AlertButton from "./AlertButton";
+
 
 
 function App() {
@@ -33,9 +35,7 @@ function App() {
         
       </Row>
     </Container>
-      
-      
-      
+
     </div>
     </Router>
   );

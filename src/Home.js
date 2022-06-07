@@ -7,37 +7,31 @@ import AlertButton from "./AlertButton";
 import { callMsGraph } from "./graph.tsx";
 
 
-
+ 
 const Home = () => {
 
     const { instance, accounts } = useMsal()
     // const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
-    const [number, setNumber] = useState([])
+    // const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api"
 
 
     useEffect(()=>{
         getStressedPatients(24)
     },[])
 
-    
- 
-    useEffect(()=>{
+    useEffect(()=>{ 
         if(stressedPatients.length > 0){
-            setNumber(stressedPatients.length)
-            console.log(stressedPatients.length)
-            console.log(number)
-            localStorage.setItem('number', (number.toString()));
-            AlertButton();
+            localStorage.setItem('number', stressedPatients.length.toString()) 
+            console.log(localStorage.getItem('number')) 
         }
         else{
             handleClear()
-        } 
-        
-    },[number])
-
+        }  
+    },[])
+ 
     const getStressedPatients = async(value) => {
         await axios.get("https://localhost:5001/patients/stressed/"+value).then((res) => {
             setStressedPatients([...res.data])
@@ -45,8 +39,8 @@ const Home = () => {
     }
 
     function handleClear(){
-        localStorage.removeItem('number')
-        setStressedPatients(0) 
+        localStorage.setItem('number', 0)
+        setStressedPatients(0)
     }
 
     return (
