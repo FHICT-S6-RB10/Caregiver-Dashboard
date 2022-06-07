@@ -12,7 +12,7 @@ const PatientsList = ({ patients, stressedPatients }) => {
         <div className="patients-list">
             {
                 stressedPatients && stressedPatients.map((patient) => (
-                    <div className="patients-preview attention" key={patient.patientId}>
+                    <div className="notifications attention" key={patient.patientId}>
                         <button className="deleteButton" onClick={handleDelete}></button>
                         <Link className="links" to={`/patient/${patient.patientId}`}>
                             <h2>Stressed Patient:</h2>
@@ -23,7 +23,7 @@ const PatientsList = ({ patients, stressedPatients }) => {
             }
 
             {patients && patients.map((patient) => (
-                <div className="patients-preview normal" key={patient.id}>
+                <div className="notifications normal" key={patient.id}>
                     <Link className="links" to={`/patient/${patient.id}`}>
                     <h2>New Patient Has Been Added:</h2>
                     <h3>{ patient.firstName } { patient.lastName}</h3>

@@ -222,6 +222,9 @@ code {
   border-width: 0.02em;
   border-radius: 15px;
 }
+.notifications{
+  margin: 20px 350px;
+}
 .dd-list {
   box-shadow: 0 .125rem .25rem rgba(123, 123, 123, 0.075) !important;
   padding: 0;
