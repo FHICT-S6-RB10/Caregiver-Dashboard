@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import onClickOutside from 'react-onclickoutside';
 import useFetch from "./useFetch";
 import PatientsList from "./PatientsList";
 import { Link } from 'react-router-dom'
+import { useMsal } from "@azure/msal-react";
+import Home from "./Home";
+
 
 
 
 function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
     
+    const { instance, accounts } = useMsal();
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
+   
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
+
     Dropdown.handleClickOutside = () => setOpen(false);
+
+
+    
 
     function handleOnCLick(group) {
         if (!selection.some(current => current.id === group.id))
         {
+            if(group.id){
+                setSelection([group])
+            }
             if(!multiSelect){
                 setSelection([group]);
             }
@@ -44,7 +57,7 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
             <div 
             tabIndex={0} 
             className="dd-header" 
-            role="button" 
+            role="button"
             onKeyPress={() => toggle(!open)} 
             onClick={() => toggle(!open)}>
                 <div className="dd-header_title">
@@ -58,34 +71,15 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
             </div>
             {open && (
                 <ul className="dd-list">
-
+                
                 {groups.map(group => (
                 <li className="dd-list-item" key={group.id}>
+                    <Link to={`/groupPatients/${group.id}`}>
                     <button type="button" onClick={() => handleOnCLick(group)}>
-                        <span>{group.value}</span>
-                        <span>{group.id === 1 && isItemInSelection(group) && patients.slice(0, 3).map(
-                           patient => ( 
-                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
-                           )
-                        )
-                        // <PatientsList clients={data} title="All Clients"/> 
-                        }
-                        {group.id === 2 && isItemInSelection(group) && patients.slice(3,7).map(
-                           patient => ( 
-                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
-                           )
-                        )
-                        // <PatientsList clients={data} title="All Clients"/> 
-                        }
-                        {group.id === 3 && isItemInSelection(group) && patients.slice(8,10).map(
-                           patient => ( 
-                               <span key={patient.id}><Link className="links" to={`/patient/${patient.id}`}>{patient.firstName}</Link><br></br></span>
-                           )
-                        )
-                        // <PatientsList clients={data} title="All Clients"/> 
-                        }
-                        </span>
+                        <div>{group.groupName}</div>
+                        <div className="right-arrow"> </div>
                     </button>
+                    </Link>
                 </li>
                 ))}
                 </ul>

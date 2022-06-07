@@ -4,6 +4,7 @@ import Grid, { Container, Row, Col } from "react-bootstrap"
 import Home from './Home';
 import Patient from './Patient';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import GroupsPatients from './GroupsPatients';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
               </Route>
               <Route path ="/patient/:id">
                 <Patient/>
+              </Route>
+              <Route path ="/groupPatients/:id">
+                <GroupsPatients/>
               </Route>
             </Switch>
           </div>

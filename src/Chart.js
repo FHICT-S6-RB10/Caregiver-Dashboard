@@ -2,17 +2,19 @@ import './App.scss';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Label } from 'recharts';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import DatePicker from 'react-date-picker'
 
 const App = ({patientId}) => {
 
   var testData = [];
+  const [value, setValue] = useState(new Date())
   const [data,setData] = useState([])
   //const { data:patientStressData, isPending, error } = useFetch("https://localhost:5001/stressmeasurements/patient/"+patientId);
   const [patientStressData, setPatientStressData] = useState([])
   useEffect(()=>{
     getPatientStressData()
-
-  },[])
+    getDateFromService()
+  },[value])
 
   useEffect(()=>{
     if(patientStressData.length> 0){
@@ -21,7 +23,7 @@ const App = ({patientId}) => {
         //var day = date.getDay();
         var hours = date.getHours();
         var minutes = date.getMinutes();
-        console.log(minutes);
+        //console.log(minutes);
         if(minutes===0){
           minutes = "00";
         }
@@ -31,12 +33,20 @@ const App = ({patientId}) => {
           stressValue: stressData.heartRateVariability,
           timeStamp: hours.toString()+":"+minutes.toString()
         }
-        console.log(datapoint.timeStamp)
+        
         testData.push(datapoint);
       });
       setData(testData)
     }
   },[patientStressData])
+
+  const getDateFromService = async () =>{
+    const newValue = new Date(value).toLocaleDateString("nl-NL")
+    console.log(newValue)
+    await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId+"/timeframe/"+newValue).then((res)=>{
+      setPatientStressData([...res.data])
+    })
+  }
 
   const getPatientStressData = async () =>{
    await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
@@ -48,6 +58,7 @@ const App = ({patientId}) => {
   return (
 
     <div className="responsiveContainerDiv">
+    <DatePicker onChange={setValue} value={value}/>
     <ResponsiveContainer width="85%" aspect={3}>
       
         <LineChart
@@ -64,7 +75,7 @@ const App = ({patientId}) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
               <XAxis fontSize={17} dataKey="timeStamp">
-                  <Label value="Time" offset={-16} position="insideBottom"/>
+                <Label value="Time" offset={-16} position="insideBottom"/>
               </XAxis>
               <YAxis label={{ value: 'HRV', angle: -90, position: 'insideLeft' }}/>
               <Tooltip />
@@ -72,6 +83,7 @@ const App = ({patientId}) => {
               {/* we have onClick  */}
         </LineChart>
       </ResponsiveContainer>
+      
       </div>
   );
 }
