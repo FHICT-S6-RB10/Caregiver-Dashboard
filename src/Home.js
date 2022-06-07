@@ -11,7 +11,7 @@ import { callMsGraph } from "./graph.tsx";
 const Home = () => {
 
     const { instance, accounts } = useMsal()
-    const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
+    // const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
@@ -34,7 +34,7 @@ const Home = () => {
         }
         else{
             handleClear()
-        }
+        } 
         
     },[number])
 
@@ -46,20 +46,17 @@ const Home = () => {
 
     function handleClear(){
         localStorage.removeItem('number')
-        setStressedPatients(0);
-        // window.location.reload(true);
+        setStressedPatients(0) 
     }
 
     return (
         <div className="home">
                 <h1>
                     Welcome, { instance.getActiveAccount().name }
-                </h1>
+                </h1> 
                 <button onClick={handleClear} className="clearButton"></button>
-                { error && <div>{error}</div>}
-                { isPending &&<div>Loading...</div>}
-                {!isPending &&
-                <PatientsList patients={data} stressedPatients={stressedPatients} title="All Patients"/>
+                {stressedPatients && 
+                <PatientsList stressedPatients={stressedPatients} title="All Patients"/>
                 }
         </div>
      );

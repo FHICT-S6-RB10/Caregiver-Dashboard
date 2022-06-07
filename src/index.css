@@ -122,8 +122,14 @@ code {
 }
 .clearButton:hover{
   cursor: pointer;
+  box-shadow: 1px 2px 3px 1px #757575;
+}
+
+.deleteButton:hover{
+  cursor: pointer;
   box-shadow: 3px 3px 5px 3px #757575;
 }
+
 .content {
   float: right;
   top: 0;
@@ -153,7 +159,19 @@ code {
 .patients-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
+.attention:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+.normal:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
 .patients-preview h2 {
+  font-size: 20px;
+  color: #333333;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+.notifications h2 {
   font-size: 20px;
   color: #333333;
   margin-bottom: 8px;
@@ -223,7 +241,13 @@ code {
   border-radius: 15px;
 }
 .notifications{
-  margin: 20px 350px;
+  width: 70%;
+  text-decoration: none;
+  padding: 10px 16px;
+  margin: 20px auto;
+  border-bottom: 1px solid #fafafa;
+  border-radius: 22px;
+  /* background-color: #f2f2f2; */
 }
 .dd-list {
   box-shadow: 0 .125rem .25rem rgba(123, 123, 123, 0.075) !important;
@@ -235,4 +259,6 @@ code {
 .dd-list .links{
   text-decoration: none;
 }
-  
+.links{
+  text-decoration: none;
+}

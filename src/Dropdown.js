@@ -57,7 +57,7 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
             <div 
             tabIndex={0} 
             className="dd-header" 
-            role="button" 
+            role="button"
             onKeyPress={() => toggle(!open)} 
             onClick={() => toggle(!open)}>
                 <div className="dd-header_title">
