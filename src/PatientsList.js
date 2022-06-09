@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import { useEffect,useState } from "react";
 import axios from "axios";
+import AlertButton from "./AlertButton";
 
 const PatientsList = ({ patients, stressedPatients }) => {
 
     const [stressedNotifications, setStressedNotifications] = useState([])
+    var newNumber = 0
 
     useEffect(()=>{
-        setStressedNotifications(stressedPatients);
+        setStressedNotifications(stressedPatients)
         console.log(stressedPatients) 
+        localStorage.setItem('number', stressedPatients.length.toString()) 
+        console.log(localStorage.getItem('number'))
     },[])
 
     const handleDelete = (id) =>{
     setStressedNotifications(stressedNotifications.filter((patient) => patient.patientId !== id))
-};
+    newNumber = parseInt(localStorage.getItem('number'), 10) - 1
+    console.log(newNumber)
+    localStorage.setItem('number', newNumber.toString())
+    }
     
 
     return (         
@@ -38,7 +45,7 @@ const PatientsList = ({ patients, stressedPatients }) => {
                     </Link>
                 </div>
             ))}
-
+        <AlertButton/>
         </div>
 
      );

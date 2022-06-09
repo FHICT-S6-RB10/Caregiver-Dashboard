@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Dropdown from "./Dropdown";
-import AlertButton from "./AlertButton";
 import axios from "axios";
 import Select from 'react-select';
 import { useMsal } from "@azure/msal-react";
@@ -126,9 +125,6 @@ const Navbar = () => {
             
             <div className="container">
                 <Dropdown title="Select group" groups={patientGroups}/>
-                <Link to="/">
-                <AlertButton/>
-                </Link>
             </div>
 
 
