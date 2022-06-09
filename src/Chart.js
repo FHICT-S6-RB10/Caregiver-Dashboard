@@ -6,6 +6,12 @@ import DatePicker from 'react-date-picker'
 
 const App = ({patientId}) => {
 
+  var options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+};
+
   var testData = [];
   const [value, setValue] = useState(new Date())
   const [data,setData] = useState([])
@@ -41,10 +47,11 @@ const App = ({patientId}) => {
   },[patientStressData])
 
   const getDateFromService = async () =>{
-    const newValue = new Date(value).toLocaleDateString("nl-NL")
+    const newValue = new Date(value).toLocaleDateString("nl-NL", options)
     console.log(newValue)
     await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId+"/timeframe/"+newValue).then((res)=>{
       setPatientStressData([...res.data])
+      console.log([...res.data])
     })
   }
 
