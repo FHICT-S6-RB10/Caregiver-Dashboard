@@ -14,24 +14,53 @@ const Navbar = () => {
   }
 
 
-
-  var testData = [];
+ 
+  var testData = []
+  var tesdDataPoint = []
   const [patients, setPatients] = useState([])
+    const [NewUniquePatients, setNewUniquePatients] = useState([])
   const [data,setData] = useState([])
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
   const [patientGroups, setPatientGroups] = useState([])  
 
     useEffect(()=>{
-        getPatients()
-        fetchPatientGroups()
-    },[])
+        // getPatients()  
+        fetchPatientGroups() 
+    },[]) 
+  
+    useEffect(()=>{   
+      getPatientsFromGroups()  
+  },[]) 
+
+  useEffect(() => {
+    GetUniquePatients()
+    console.log(NewUniquePatients) 
+  },[])
+
+  const GetUniquePatients = () => {
+    setNewUniquePatients(getUnique(patients, 'id'))
+  }
+
+  function getUnique(arr, index) {
+
+    const unique = arr
+         .map(e => e[index])
+  
+         // store the keys of the unique objects
+         .map((e, i, final) => final.indexOf(e) === i && i)
+    
+         // eliminate the dead keys & store unique objects
+        .filter(e => arr[e]).map(e => arr[e]);      
+  
+     return unique;
+  }
 
     const callApi = async ({ token, apiUrl, path, method, body } ) => {
       const url = `${apiUrl ? apiUrl : API_URL}/${path}`
   
       const fetchOptions = {
           method,
-          headers: { 
+          headers: {  
               "Content-type": "application/json",
               "Authorization": "Bearer " + token
           }
@@ -68,6 +97,38 @@ const Navbar = () => {
       account: accounts[0]
   };
 
+  const getPatientsFromGroups = () => {
+    console.log("Getting patients from groups")
+    patientGroups.forEach(group => {
+        instance.acquireTokenSilent(request).then(res => {
+            getPatientsGroupsPatients(res.accessToken, group.id).then(response => {
+                console.log(response.response)
+                const FoundPatients = response.response
+                    FoundPatients.forEach(patient => {
+                        if(testData.includes(patient)){
+                            console.log("Patient already added")
+                        }
+                        else{
+                            testData.push(patient)
+                        }
+                        console.log(testData)
+                    })
+                })
+        }).catch((err) => {
+            console.error('Error occurred while fetching patients', err)
+        })
+        .catch((e) => {
+          instance.acquireTokenPopup(request).then(console.log)})
+        
+        })
+    setPatients(testData)
+    console.log(testData)
+}
+
+const getPatientsGroupsPatients = (accessToken, id) => {
+  return callApi({ token: accessToken, path: "patient-groups/"+id+"/patients", method: 'GET' })
+}
+
   const fetchPatientGroups = () => {
       instance.acquireTokenSilent(request).then(res => {
           getPatientsGroups(res.accessToken).then(response => {
@@ -90,36 +151,39 @@ const Navbar = () => {
   //     })
   // }
 
-    const getPatients = async () =>{
-      await axios.get("https://localhost:5001/patients").then((res)=>{
-         setPatients([...res.data])
-       })
-  }
+  //   const getPatients = async () =>{
+  //     await axios.get("https://localhost:5001/patients").then((res)=>{
+  //        setPatients([...res.data])
+  //      })
+  // }
 
     useEffect(()=>{
-      if(patients.length> 0){
-        patients.forEach(patient =>{      
+      if(getUnique(NewUniquePatients, 'id').length> 0){
+        getUnique(NewUniquePatients, 'id').forEach(patient =>{      
           
           var datapoint = {
             id: patient.id.toString(),
             label: patient.firstName.toString(),
             value: patient.lastName.toString() 
           }
-          testData.push(datapoint);
+          tesdDataPoint.push(datapoint); 
         });
-        setData(testData)
+        console.log(tesdDataPoint)
+        setData(tesdDataPoint)
       }
-    },[patients])
+    },[NewUniquePatients]) 
 
     return (
-
+ 
         <nav className="navbar">
-            <Link to="/">
-            <h1>
-                SWSP
+            <Link to="/">  
+            <h1>   
+                SWSP 
             </h1>
             </Link>
-            <button className="logoutButton" onClick={handleLogout}></button>            <div className="searchBar">
+            <button className="logoutButton" onClick={handleLogout}></button>
+            <div className="searchBar">
+              {console.log(data)}
               <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             

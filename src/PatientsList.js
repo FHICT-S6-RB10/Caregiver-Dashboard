@@ -8,9 +8,9 @@ const PatientsList = ({ patients, stressedPatients }) => {
     const [stressedNotifications, setStressedNotifications] = useState([])
     var newNumber = 0
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         setStressedNotifications(stressedPatients)
-        console.log(stressedPatients) 
+        console.log(stressedPatients)  
         localStorage.setItem('number', stressedPatients.length.toString()) 
         console.log(localStorage.getItem('number'))
     },[])
@@ -22,9 +22,10 @@ const PatientsList = ({ patients, stressedPatients }) => {
     localStorage.setItem('number', newNumber.toString())
     }
     
-
+ 
     return (         
         <div className="notifications">
+            {console.log(stressedNotifications)}
             {
                 stressedNotifications && stressedNotifications.map((patient) => (
                     <div className="notifications attention" key={patient.patientId}> 
