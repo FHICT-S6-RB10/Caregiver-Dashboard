@@ -153,21 +153,21 @@ const Navbar = () => {
        })
   }
 
-    useEffect(()=>{
-      if(getUnique(NewUniquePatients, 'id').length> 0){
-        getUnique(NewUniquePatients, 'id').forEach(patient =>{      
+    // useEffect(()=>{
+    //   if(getUnique(NewUniquePatients, 'id').length> 0){
+    //     getUnique(NewUniquePatients, 'id').forEach(patient =>{      
           
-          var datapoint = {
-            id: patient.id.toString(),
-            label: patient.firstName.toString(),
-            value: patient.lastName.toString() 
-          }
-          tesdDataPoint.push(datapoint); 
-        });
-        console.log(tesdDataPoint)
-        setData(tesdDataPoint)
-      }
-    },[NewUniquePatients]) 
+    //       var datapoint = {
+    //         id: patient.id.toString(),
+    //         label: patient.firstName.toString(),
+    //         value: patient.lastName.toString() 
+    //       }
+    //       tesdDataPoint.push(datapoint); 
+    //     });
+    //     console.log(tesdDataPoint)
+    //     setData(tesdDataPoint)
+    //   }
+    // },[NewUniquePatients]) 
 
     return (
  
