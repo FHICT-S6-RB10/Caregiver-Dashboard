@@ -153,21 +153,21 @@ const Navbar = () => {
        })
   }
 
-    // useEffect(()=>{
-    //   if(getUnique(NewUniquePatients, 'id').length> 0){
-    //     getUnique(NewUniquePatients, 'id').forEach(patient =>{      
+    useEffect(()=>{
+      
+        patients.forEach(patient =>{      
           
-    //       var datapoint = {
-    //         id: patient.id.toString(),
-    //         label: patient.firstName.toString(),
-    //         value: patient.lastName.toString() 
-    //       }
-    //       tesdDataPoint.push(datapoint); 
-    //     });
-    //     console.log(tesdDataPoint)
-    //     setData(tesdDataPoint)
-    //   }
-    // },[NewUniquePatients]) 
+          var datapoint = {
+            id: patient.id.toString(),
+            label: patient.firstName.toString(),
+            value: patient.lastName.toString() 
+          }
+          tesdDataPoint.push(datapoint); 
+        });
+        console.log(tesdDataPoint)
+        setData(tesdDataPoint)
+      
+    },[]) 
 
     return (
  
@@ -180,7 +180,7 @@ const Navbar = () => {
             <button className="logoutButton" onClick={handleLogout}></button>
             <div className="searchBar">
               {console.log(patients)}
-              <Select options={patients} onChange={opt => window.location.href='/patient/'+opt.id}/>
+              <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             
             <div className="container">
