@@ -16,7 +16,7 @@ function Dropdown({ title, groups = [], patients=[], multiSelect = false}) {
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
    
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5050/api";
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
 
     Dropdown.handleClickOutside = () => setOpen(false);
 

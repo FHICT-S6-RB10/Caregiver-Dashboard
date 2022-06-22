@@ -12,13 +12,13 @@ const Home = () => {
 
     var testData = []
     const { instance, accounts } = useMsal()
-    // const { data, isPending, error } = useFetch('http://localhost:5050/api/patients');
+    // const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     // const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
     const [NewUniquePatients, setNewUniquePatients] = useState([])
 
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5050/api"
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api"
     const [patientGroups, setPatientGroups] = useState([])
 
     useEffect(()=>{

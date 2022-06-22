@@ -19,7 +19,7 @@ const GroupsPatients = ({}) => {
     const [stressedPatients, setStressedPatients] = useState([])
     const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5050/api";
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
     const [groupId, setGroupId] = useState([])
     const [patientGroupsPatients, setPatientGroupsPatients] = useState([])
 

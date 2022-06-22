@@ -20,7 +20,7 @@ const Navbar = () => {
   const [patients, setPatients] = useState([])
     const [NewUniquePatients, setNewUniquePatients] = useState([])
   const [data,setData] = useState([])
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5050/api";
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api";
   const [patientGroups, setPatientGroups] = useState([])  
 
     useEffect(()=>{
@@ -146,7 +146,7 @@ const getPatientsGroupsPatients = (accessToken, id) => {
   
 
   // const getPatients = async() => {
-  //     await axios.get("http://localhost:5050/api/patients").then((res) => {
+  //     await axios.get("http://localhost:3030/api/patients").then((res) => {
   //         setPatients([...res.data])
   //     })
   // }
