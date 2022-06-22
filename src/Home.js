@@ -12,15 +12,14 @@ const Home = () => {
 
     var testData = []
     const { instance, accounts } = useMsal()
-    // const { data, isPending, error } = useFetch('http://localhost:3030/api/patients');
+    // const { data, isPending, error } = useFetch('http://localhost:5050/api/patients');
     const [stressedPatients, setStressedPatients] = useState([])
     // const [number, setNumber] = useState([])
     const [patients, setPatients] = useState([])
     const [NewUniquePatients, setNewUniquePatients] = useState([])
 
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3030/api"
-    const [patientGroups, setPatientGroups] = useState([])  
-
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5050/api"
+    const [patientGroups, setPatientGroups] = useState([])
 
     useEffect(()=>{
         getStressedPatients(24)
@@ -29,7 +28,8 @@ const Home = () => {
 
     useEffect(()=>{ 
         getPatientsFromGroups()
-    },[])
+        console.log(stressedPatients) 
+    },[]) 
 
     useEffect(() => {
         GetUniquePatients()
@@ -99,7 +99,7 @@ const Home = () => {
 
     const callApi = async ({ token, apiUrl, path, method, body } ) => {
         const url = `${apiUrl ? apiUrl : API_URL}/${path}`
-    
+         
         const fetchOptions = {
             method,
             headers: { 
@@ -123,15 +123,15 @@ const Home = () => {
             }); 
         } catch (e) {
             return {
-                error: true,  
-                response: e
+                error: true,
+                response: e 
             }; 
         }  
-    }  
-    
-  
+    }   
+     
+   
     const getPatientsGroups = (accessToken) => { 
-        return callApi({ token: accessToken, path: 'patient-groups', method: 'GET' })
+        return callApi({ token: accessToken, path: 'patient-groups', method: 'GET' }) 
     }
   
     const request = {
@@ -151,7 +151,7 @@ const Home = () => {
         })
         .catch((e) => {
           instance.acquireTokenPopup(request).then(console.log)})
-    } 
+    }
  
     const getStressedPatients = async(value) => {
         await axios.get("https://localhost:5001/patients/stressed/"+value).then((res) => {

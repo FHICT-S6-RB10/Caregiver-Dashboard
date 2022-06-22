@@ -7,14 +7,14 @@ const PatientsList = ({ patients, stressedPatients }) => {
 
     const [stressedNotifications, setStressedNotifications] = useState([])
     var newNumber = 0
-
-    useEffect(()=>{ 
+ 
+    useEffect(()=>{   
         setStressedNotifications(stressedPatients)
-        console.log(stressedPatients)  
+        console.log(stressedPatients)     
         localStorage.setItem('number', stressedPatients.length.toString()) 
         console.log(localStorage.getItem('number'))
-    },[])
-
+    },[]) 
+  
     const handleDelete = (id) =>{
     setStressedNotifications(stressedNotifications.filter((patient) => patient.patientId !== id))
     newNumber = parseInt(localStorage.getItem('number'), 10) - 1
@@ -30,12 +30,12 @@ const PatientsList = ({ patients, stressedPatients }) => {
                 stressedNotifications && stressedNotifications.map((patient) => (
                     <div className="notifications attention" key={patient.patientId}> 
                         <button className="deleteButton" onClick={() => handleDelete(patient.patientId)}></button>
-                        <Link className="links" to={`/patient/${patient.patientId}`}>
+                        <Link className="links" to={`/patient/${patient.patientId}`}> 
                             <h2>Stressed Patient:</h2>
                             <h3>{ patient.firstName } { patient.lastName} - HRV: {patient.heartRateVariability} - Time: {patient.timestamp.substring(11, 16)}</h3>
                         </Link>
                     </div>
-                ))
+                )) 
             }
 
             {patients && patients.map((patient) => (
