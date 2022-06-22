@@ -15,7 +15,7 @@ const App = ({patientId}) => {
   var testData = [];
   const [value, setValue] = useState(new Date())
   const [data,setData] = useState([])
-  //const { data:patientStressData, isPending, error } = useFetch("https://localhost:5001/stressmeasurements/patient/"+patientId);
+  //const { data:patientStressData, isPending, error } = useFetch("https://localhost:5031/stressmeasurements/patient/"+patientId);
   const [patientStressData, setPatientStressData] = useState([])
   useEffect(()=>{
     getPatientStressData()
@@ -49,14 +49,14 @@ const App = ({patientId}) => {
   const getDateFromService = async () =>{
     const newValue = new Date(value).toLocaleDateString("nl-NL", options)
     console.log(newValue)
-    await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId+"/timeframe/"+newValue).then((res)=>{
+    await axios.get("https://localhost:5031/heartratevariabilitymeasurements/patient/"+patientId+"/timeframe/"+newValue).then((res)=>{
       setPatientStressData([...res.data])
       console.log([...res.data])
     })
   }
 
   const getPatientStressData = async () =>{
-   await axios.get("https://localhost:5001/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
+   await axios.get("https://localhost:5031/heartratevariabilitymeasurements/patient/"+patientId).then((res)=>{
       setPatientStressData([...res.data])
     })
   }

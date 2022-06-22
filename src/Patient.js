@@ -15,7 +15,7 @@ const Patient = () => {
     },[])
 
     const getPatients = async () =>{
-        await axios.get("https://localhost:5001/patients").then((res)=>{
+        await axios.get("https://localhost:5031/patients").then((res)=>{
            setPatients([...res.data])
          })
     }

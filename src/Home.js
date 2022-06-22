@@ -23,29 +23,30 @@ const Home = () => {
 
     useEffect(()=>{
         getStressedPatients(24)
-        fetchPatientGroups()
+        getPatients()
+        // fetchPatientGroups()
     },[])
 
-    useEffect(()=>{ 
-        getPatientsFromGroups()
-        console.log(stressedPatients) 
-    },[]) 
+    // useEffect(()=>{ 
+    //     getPatientsFromGroups()
+    //     console.log(stressedPatients) 
+    // },[]) 
 
-    useEffect(() => {
-        GetUniquePatients()
-        console.log(NewUniquePatients)
-    },[])
+    // useEffect(() => {
+    //     GetUniquePatients()
+    //     console.log(NewUniquePatients)
+    // },[])
 
-    useEffect(()=>{
-        console.log(getUnique(patients, 'id'))
-        if(stressedPatients.length > 0){
+    // useEffect(()=>{
+    //     console.log(getUnique(patients, 'id'))
+    //     if(stressedPatients.length > 0){
             
-            console.log(localStorage.getItem('number')) 
-        }
-        else{
-            handleClear()
-        }
-    },[])
+    //         console.log(localStorage.getItem('number')) 
+    //     }
+    //     else{
+    //         handleClear()
+    //     }
+    // },[])
 
     const GetUniquePatients = () => {
         setNewUniquePatients(getUnique(patients, 'id'))
@@ -65,33 +66,33 @@ const Home = () => {
          return unique;
       }
  
-    const getPatientsFromGroups = () => {
-        console.log("Getting patients from groups")
-        patientGroups.forEach(group => {
-            instance.acquireTokenSilent(request).then(res => {
-                getPatientsGroupsPatients(res.accessToken, group.id).then(response => {
-                    console.log(response.response)
-                    const FoundPatients = response.response
-                        FoundPatients.forEach(patient => {
-                            if(testData.includes(patient)){
-                                console.log("Patient already added")
-                            }
-                            else{
-                                testData.push(patient)
-                            }
-                            console.log(testData)
-                        })
-                    })
-            }).catch((err) => {
-                console.error('Error occurred while fetching patients', err)
-            })
-            .catch((e) => {
-              instance.acquireTokenPopup(request).then(console.log)})
+    // const getPatientsFromGroups = () => {
+    //     console.log("Getting patients from groups")
+    //     patientGroups.forEach(group => {
+    //         instance.acquireTokenSilent(request).then(res => {
+    //             getPatientsGroupsPatients(res.accessToken, group.id).then(response => {
+    //                 console.log(response.response)
+    //                 const FoundPatients = response.response
+    //                     FoundPatients.forEach(patient => {
+    //                         if(testData.includes(patient)){
+    //                             console.log("Patient already added")
+    //                         }
+    //                         else{
+    //                             testData.push(patient)
+    //                         }
+    //                         console.log(testData)
+    //                     })
+    //                 })
+    //         }).catch((err) => {
+    //             console.error('Error occurred while fetching patients', err)
+    //         })
+    //         .catch((e) => {
+    //           instance.acquireTokenPopup(request).then(console.log)})
             
-            })
-        setPatients(testData)
-        console.log(testData)
-    }
+    //         })
+    //     setPatients(testData)
+    //     console.log(testData)
+    // }
 
     const getPatientsGroupsPatients = (accessToken, id) => {
         return callApi({ token: accessToken, path: "patient-groups/"+id+"/patients", method: 'GET' })
@@ -152,9 +153,15 @@ const Home = () => {
         .catch((e) => {
           instance.acquireTokenPopup(request).then(console.log)})
     }
+
+    const getPatients = async () =>{
+        await axios.get("https://localhost:5031/patients").then((res)=>{
+           setPatients([...res.data])
+         })
+    }
  
     const getStressedPatients = async(value) => {
-        await axios.get("https://localhost:5001/patients/stressed/"+value).then((res) => {
+        await axios.get("https://localhost:5031/patients/stressed/"+value).then((res) => {
             setStressedPatients([...res.data])
         })  
     }    
@@ -171,7 +178,7 @@ const Home = () => {
                 </h1> 
                 <button onClick={handleClear} className="clearButton"></button>
                 { 
-                <PatientsList patients={NewUniquePatients} stressedPatients={stressedPatients} title="All Patients"/>
+                <PatientsList patients={patients} stressedPatients={stressedPatients} title="All Patients"/>
                 }
         </div>
      );
