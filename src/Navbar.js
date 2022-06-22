@@ -24,36 +24,32 @@ const Navbar = () => {
   const [patientGroups, setPatientGroups] = useState([])  
 
     useEffect(()=>{
-        // getPatients()  
+        getPatients()  
         fetchPatientGroups() 
     },[]) 
+
+  // useEffect(() => {
+  //   GetUniquePatients()
+  //   console.log(NewUniquePatients) 
+  // },[])
+
+  // const GetUniquePatients = () => {
+  //   setNewUniquePatients(getUnique(patients, 'id'))
+  // }
+
+  // function getUnique(arr, index) {
+
+  //   const unique = arr
+  //        .map(e => e[index])
   
-    useEffect(()=>{   
-      getPatientsFromGroups()  
-  },[]) 
-
-  useEffect(() => {
-    GetUniquePatients()
-    console.log(NewUniquePatients) 
-  },[])
-
-  const GetUniquePatients = () => {
-    setNewUniquePatients(getUnique(patients, 'id'))
-  }
-
-  function getUnique(arr, index) {
-
-    const unique = arr
-         .map(e => e[index])
-  
-         // store the keys of the unique objects
-         .map((e, i, final) => final.indexOf(e) === i && i)
+  //        // store the keys of the unique objects
+  //        .map((e, i, final) => final.indexOf(e) === i && i)
     
-         // eliminate the dead keys & store unique objects
-        .filter(e => arr[e]).map(e => arr[e]);      
+  //        // eliminate the dead keys & store unique objects
+  //       .filter(e => arr[e]).map(e => arr[e]);      
   
-     return unique;
-  }
+  //    return unique;
+  // }
 
     const callApi = async ({ token, apiUrl, path, method, body } ) => {
       const url = `${apiUrl ? apiUrl : API_URL}/${path}`
@@ -97,37 +93,37 @@ const Navbar = () => {
       account: accounts[0]
   };
 
-  const getPatientsFromGroups = () => {
-    console.log("Getting patients from groups")
-    patientGroups.forEach(group => {
-        instance.acquireTokenSilent(request).then(res => {
-            getPatientsGroupsPatients(res.accessToken, group.id).then(response => {
-                console.log(response.response)
-                const FoundPatients = response.response
-                    FoundPatients.forEach(patient => {
-                        if(testData.includes(patient)){
-                            console.log("Patient already added")
-                        }
-                        else{
-                            testData.push(patient)
-                        }
-                        console.log(testData)
-                    })
-                })
-        }).catch((err) => {
-            console.error('Error occurred while fetching patients', err)
-        })
-        .catch((e) => {
-          instance.acquireTokenPopup(request).then(console.log)})
+//   const getPatientsFromGroups = () => {
+//     console.log("Getting patients from groups")
+//     patientGroups.forEach(group => {
+//         instance.acquireTokenSilent(request).then(res => {
+//             getPatientsGroupsPatients(res.accessToken, group.id).then(response => {
+//                 console.log(response.response)
+//                 const FoundPatients = response.response
+//                     FoundPatients.forEach(patient => {
+//                         if(testData.includes(patient)){
+//                             console.log("Patient already added")
+//                         }
+//                         else{
+//                             testData.push(patient)
+//                         }
+//                         console.log(testData)
+//                     })
+//                 })
+//         }).catch((err) => {
+//             console.error('Error occurred while fetching patients', err)
+//         })
+//         .catch((e) => {
+//           instance.acquireTokenPopup(request).then(console.log)})
         
-        })
-    setPatients(testData)
-    console.log(testData)
-}
+//         })
+//     setPatients(testData)
+//     console.log(testData)
+// }
 
-const getPatientsGroupsPatients = (accessToken, id) => {
-  return callApi({ token: accessToken, path: "patient-groups/"+id+"/patients", method: 'GET' })
-}
+// const getPatientsGroupsPatients = (accessToken, id) => {
+//   return callApi({ token: accessToken, path: "patient-groups/"+id+"/patients", method: 'GET' })
+// }
 
   const fetchPatientGroups = () => {
       instance.acquireTokenSilent(request).then(res => {
@@ -151,11 +147,11 @@ const getPatientsGroupsPatients = (accessToken, id) => {
   //     })
   // }
 
-  //   const getPatients = async () =>{
-  //     await axios.get("https://localhost:5001/patients").then((res)=>{
-  //        setPatients([...res.data])
-  //      })
-  // }
+    const getPatients = async () =>{
+      await axios.get("https://localhost:5031/patients").then((res)=>{
+         setPatients([...res.data])
+       })
+  }
 
     useEffect(()=>{
       if(getUnique(NewUniquePatients, 'id').length> 0){
@@ -183,8 +179,8 @@ const getPatientsGroupsPatients = (accessToken, id) => {
             </Link>
             <button className="logoutButton" onClick={handleLogout}></button>
             <div className="searchBar">
-              {console.log(data)}
-              <Select options={data} onChange={opt => window.location.href='/patient/'+opt.id}/>
+              {console.log(patients)}
+              <Select options={patients} onChange={opt => window.location.href='/patient/'+opt.id}/>
             </div>
             
             <div className="container">
